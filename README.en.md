@@ -1,5 +1,9 @@
 # AI Visual Director
 
+<p align="center">
+  <a href="./README.md">中文</a> · <a href="./README.en.md"><b>🇬🇧 English</b></a>
+</p>
+
 > From story to visuals — a complete production pipeline
 
 AI Visual Director transforms any story, novel, or script into cinematic visual development proposals. 30 core capabilities, 34 reference files, covering the complete workflow from **input → analysis → generation → scoring → checking → editing → export → video → industry formats**.

@@ -1,5 +1,9 @@
 # AI Visual Director
 
+<p align="center">
+  <a href="./README.md"><b>🇨🇳 中文</b></a> · <a href="./README.en.md">English</a>
+</p>
+
 > 从故事到视觉，一条完整生产管线
 
 AI 视觉导演 — 将任意故事、小说、剧本转化为电影级视觉开发方案。30 项核心能力，34 个参考文件，覆盖从**输入→分析→生成→评分→检查→修改→导出→视频→行业格式**的完整制作流程。
