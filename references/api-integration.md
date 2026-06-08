@@ -1,0 +1,209 @@
+# AI 图片生成 API 集成
+
+直接通过 API 调用各平台生成图片，不再需要手动复制 prompt。
+
+---
+
+## 配置
+
+在项目根目录创建 `.env` 文件（或直接设置环境变量）：
+
+```bash
+# Flux (via Replicate)
+REPLICATE_API_TOKEN=r8_xxxxxxxxxxxx
+
+# Ideogram
+IDEOGRAM_API_KEY=xxxxxxxxxxxx
+
+# 通义万相 (Alibaba Cloud)
+DASHSCOPE_API_KEY=sk-xxxxxxxxxxxx
+
+# Recraft
+RECRAFT_API_KEY=xxxxxxxxxxxx
+
+# ComfyUI (本地)
+COMFYUI_BASE_URL=http://127.0.0.1:8188
+```
+
+---
+
+## 一、Flux (via Replicate)
+
+**模型**：`black-forest-labs/flux-1.1-pro` / `flux-dev` / `flux-schnell`
+
+```javascript
+// 生成图片
+const response = await fetch("https://api.replicate.com/v1/predictions", {
+  method: "POST",
+  headers: {
+    "Authorization": `Token ${process.env.REPLICATE_API_TOKEN}`,
+    "Content-Type": "application/json"
+  },
+  body: JSON.stringify({
+    // 使用特定版本号，避免每次拉最新
+    version: "f2fe2b3b5a1e0e0e0e0e0e0e0e0e0e0e0e0e0e0e0e",
+    input: {
+      prompt: `[中文 prompt + 英文关键词]`,
+      aspect_ratio: "16:9",
+      output_format: "png",
+      output_quality: 100,
+      num_outputs: 1
+    }
+  })
+});
+
+const result = await response.json();
+// 轮询获取结果
+const imageUrl = await pollPrediction(result.id);
+```
+
+**适用场景**：高质量单图、角色卡、场景卡、海报
+
+---
+
+## 二、Ideogram
+
+```javascript
+const response = await fetch("https://api.ideogram.ai/generate", {
+  method: "POST",
+  headers: {
+    "Api-Key": process.env.IDEOGRAM_API_KEY,
+    "Content-Type": "application/json"
+  },
+  body: JSON.stringify({
+    image_request: {
+      prompt: `[英文 prompt]`,
+      aspect_ratio: "ASPECT_16_9",
+      model: "V_2A",
+      magic_prompt_option: "AUTO",
+      num_images: 1
+    }
+  })
+});
+
+const result = await response.json();
+const imageUrl = result.data[0].url;
+```
+
+**适用场景**：需要文字排版的海报、封面、标题图（Ideogram 文字能力强）
+
+---
+
+## 三、通义万相 (Alibaba Cloud DashScope)
+
+```javascript
+const response = await fetch("https://dashscope.aliyuncs.com/api/v1/services/aigc/text2image/image-synthesis", {
+  method: "POST",
+  headers: {
+    "Authorization": `Bearer ${process.env.DASHSCOPE_API_KEY}`,
+    "Content-Type": "application/json",
+    "X-DashScope-Async": "enable"
+  },
+  body: JSON.stringify({
+    model: "wan2.1-t2i",
+    input: {
+      prompt: `[中文 prompt]`
+    },
+    parameters: {
+      size: "1024*1024",
+      n: 1
+    }
+  })
+});
+
+const result = await response.json();
+// 异步任务，需轮询
+const taskResult = await pollTask(result.output.task_id);
+const imageUrl = taskResult.output.results[0].url;
+```
+
+**适用场景**：中文理解强，古风/国风/东方题材效果好
+
+---
+
+## 四、ComfyUI (本地)
+
+```javascript
+// 1. 提交工作流
+const response = await fetch(`${COMFYUI_BASE_URL}/prompt`, {
+  method: "POST",
+  headers: { "Content-Type": "application/json" },
+  body: JSON.stringify({
+    prompt: workflow  // ComfyUI 工作流 JSON
+  })
+});
+
+const { prompt_id } = await response.json();
+
+// 2. 轮询结果
+const result = await pollComfyUI(prompt_id);
+
+// 3. 下载图片
+const imageUrl = `${COMFYUI_BASE_URL}/view?filename=${result.filename}`;
+```
+
+**适用场景**：SDXL/SD3/Flux 本地运行，ControlNet，批量出图，角色一致性最强
+
+---
+
+## 五、Recraft
+
+```javascript
+const response = await fetch("https://api.recraft.ai/v1/images/generations", {
+  method: "POST",
+  headers: {
+    "Authorization": `Bearer ${process.env.RECRAFT_API_KEY}`,
+    "Content-Type": "application/json"
+  },
+  body: JSON.stringify({
+    prompt: `[英文 prompt]`,
+    style: "digital_illustration",
+    model: "recraft-v3",
+    size: { width: 1920, height: 1080 }
+  })
+});
+
+const result = await response.json();
+const imageUrl = result.data[0].url;
+```
+
+**适用场景**：矢量风格、设计感、插画风
+
+---
+
+## 通用调用模式
+
+所有平台统一调用方式：
+
+```
+用户："用 [平台] 生成 [格式]"
+      ↓
+AI 从模板生成 prompt
+      ↓
+AI 调用对应平台 API（用 node_repl MCP）
+      ↓
+返回图片 URL / 下载到本地
+```
+
+### 平台选择指南
+
+| 需求 | 推荐平台 |
+|------|---------|
+| 中文 prompt、排版复杂 | GPT Image 2/3 |
+| 高质量单图、角色卡 | Flux (Replicate) |
+| 文字排版海报 | Ideogram |
+| 古风/国风/东方 | 通义万相 |
+| 角色一致性最强 | ComfyUI (本地 SDXL+IP-Adapter) |
+| 快速批量 | Flux Schnell / 通义万相 |
+| 矢量/设计风 | Recraft |
+
+### 成本参考
+
+| 平台 | 单价 | 
+|------|------|
+| Flux Pro (Replicate) | ~$0.05/张 |
+| Flux Schnell | ~$0.003/张 |
+| Ideogram | ~$0.04/张 |
+| 通义万相 | ~¥0.08/张 |
+| ComfyUI | 本地免费 |
+| Recraft | 免费额度 50 张/天 |

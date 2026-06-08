@@ -420,6 +420,15 @@ HE3 中国古风 | TR1 快切 | SD: SE2雨声+FX15剑鸣
 - 回复"出视频 prompt"默认压缩模式
 - 回复"详细模式"或"展开 prompt"切换详细模式
 
+【API 直接生成图片】（配置 API Key 后，直接调平台接口出图，无需手动复制 prompt）：
+→ 回复"配置 API"查看配置方式（环境变量 + .env 模板）
+→ 回复"用 Flux 生成 [格式]"→ 调 Replicate API 出图
+→ 回复"用 Ideogram 生成 [格式]"→ 调 Ideogram API 出图
+→ 回复"用 通义万相 生成 [格式]"→ 调 DashScope API 出图
+→ 回复"用 ComfyUI 生成 [格式]"→ 调本地 ComfyUI 出图
+→ 回复"用 Recraft 生成 [格式]"→ 调 Recraft API 出图
+→ 详见 `references/api-integration.md`
+
 【视频专属负面提示词】（自动附加到视频 prompt 尾部）：
 ```
 no flickering, no frame flashing, no sudden brightness jumps, no color shifts,
@@ -598,6 +607,7 @@ no text garbling, no watermark, no logo, no subtitles mismatch。
 - **详细模式 / 展开 prompt** → 切换为详细模式（3000+字），每帧完整叙事段落+音效+构图+转场+台词，适合 Runway/Sora/可灵
 - **视频负面提示词** → 自动附加到所有视频 prompt 尾部，防闪烁/扭曲/漂移/跳色/断连续性
 - **检查视频 / 视频检查** → 出片后逐项打勾，场景/角色/光照/道具/动作/画面/转场/字幕/材质 10 项，定位问题归属
+- **用 [平台] 生成 [格式]** → 调 API 直接出图（Flux/Ideogram/通义万相/ComfyUI/Recraft），需先配置 API Key
 - **质量评分** → 0-100 分自动评估，低于 75 自动优化
 - **连续性检查** → 自动检查时间线/空间/角色/情绪连贯性，标注断裂点
 - **多画幅** → "适配小红书/抖音/朋友圈/所有平台" 自动切换画幅
