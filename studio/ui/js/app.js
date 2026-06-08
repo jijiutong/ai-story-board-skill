@@ -1,5 +1,5 @@
 // app.js — main entry, tab switching
-let currentTab = 'simple';
+let currentTab = 'market';
 
 function switchTab(tab) {
   currentTab = tab;
@@ -9,25 +9,29 @@ function switchTab(tab) {
   const chatBar = document.getElementById('chatBarContainer');
 
   switch (tab) {
-    case 'simple':
-      document.getElementById('simpleViewContainer').classList.add('active');
-      if (window.simpleView) window.simpleView.render();
+    case 'market':
+      document.getElementById('marketView').classList.add('active');
+      if (window.marketView) window.marketView.render();
+      if (chatBar) chatBar.style.display = 'none';
+      break;
+    case 'tools':
+      document.getElementById('toolsView').classList.add('active');
+      if (window.sidebarTools) window.sidebarTools.renderToolsPage();
       if (chatBar) chatBar.style.display = 'none';
       break;
     case 'pro':
-      document.getElementById('proViewContainer').classList.add('active');
+      document.getElementById('proView').classList.add('active');
       if (window.proView) window.proView.render();
       if (chatBar) chatBar.style.display = 'flex';
       break;
     case 'config':
-      document.getElementById('configPanelContainer').classList.add('active');
+      document.getElementById('configView').classList.add('active');
       if (window.configPanel) window.configPanel.render();
       if (chatBar) chatBar.style.display = 'none';
       break;
   }
 }
 
-// Init on load
 document.addEventListener('DOMContentLoaded', () => {
-  switchTab('simple');
+  switchTab('market');
 });

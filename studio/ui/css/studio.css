@@ -199,6 +199,288 @@ body.ws-disconnected .ws-indicator { color: var(--text-dim); }
   border-radius: var(--radius);
 }
 
+/* ========== Market View ========== */
+.market-layout {
+  display: grid;
+  grid-template-columns: 1fr 180px;
+  gap: 20px;
+  height: 100%;
+}
+
+.market-main {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  overflow-y: auto;
+}
+
+/* Story Input */
+.story-input-area {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.story-textarea {
+  width: 100%;
+  padding: 14px 18px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--bg-card);
+  color: var(--text);
+  font-size: 14px;
+  font-family: inherit;
+  resize: vertical;
+  transition: var(--transition);
+}
+
+.story-textarea:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(232, 168, 80, 0.15);
+}
+
+.story-hint { font-size: 12px; color: var(--text-dim); }
+
+/* Section header */
+.section-header {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+
+.section-header h2 { font-size: 16px; color: var(--text); }
+
+.section-hint { font-size: 12px; color: var(--text-dim); }
+
+/* Style Gallery */
+.style-gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  gap: 10px;
+  max-height: 320px;
+  overflow-y: auto;
+  padding: 2px;
+}
+
+.style-card {
+  background: var(--card-bg, var(--bg-card));
+  border: 2px solid var(--border);
+  border-radius: var(--radius);
+  padding: 12px 8px;
+  cursor: pointer;
+  transition: var(--transition);
+  text-align: center;
+  position: relative;
+}
+
+.style-card:hover {
+  border-color: var(--card-accent, var(--accent));
+  transform: translateY(-2px);
+}
+
+.style-card.selected {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 2px rgba(232, 168, 80, 0.3), 0 0 20px rgba(232, 168, 80, 0.1);
+}
+
+.style-card-emoji { font-size: 28px; margin-bottom: 6px; }
+.style-card-name { font-size: 12px; font-weight: 600; color: var(--text); }
+.style-card-tags { margin-top: 4px; display: flex; flex-wrap: wrap; gap: 3px; justify-content: center; }
+.style-card-tags span {
+  font-size: 10px; padding: 1px 6px;
+  background: rgba(255,255,255,0.06);
+  border-radius: 10px;
+  color: var(--text-dim);
+}
+
+/* Recommendations */
+.recommendations { margin-bottom: 4px; }
+
+.rec-cards {
+  display: flex;
+  gap: 12px;
+}
+
+.rec-card {
+  flex: 1;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 14px;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.rec-card:hover { border-color: var(--accent); }
+.rec-card.rec-primary { border-color: var(--accent-dim); background: rgba(232, 168, 80, 0.05); }
+
+.rec-rank { font-size: 11px; color: var(--accent); margin-bottom: 6px; font-weight: 600; }
+.rec-style { display: flex; align-items: center; gap: 8px; margin-bottom: 4px; }
+.rec-emoji { font-size: 20px; }
+.rec-name { font-size: 14px; font-weight: 600; }
+.rec-reason { font-size: 11px; color: var(--text-dim); line-height: 1.4; }
+
+/* Market actions */
+.market-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.btn-lg {
+  padding: 12px 28px;
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.selection-status {
+  font-size: 12px;
+  color: var(--text-dim);
+  margin-left: 8px;
+}
+
+/* Output area */
+.output-area { margin-top: 8px; }
+
+.output-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 10px;
+}
+
+.output-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 14px;
+  text-align: center;
+  transition: var(--transition);
+}
+
+.output-card.status-running { border-color: var(--blue); }
+.output-card.status-completed { border-color: var(--green); }
+.output-card.status-failed { border-color: var(--red); }
+
+.output-status { font-size: 20px; margin-bottom: 4px; }
+.output-label { font-size: 12px; color: var(--text-dim); }
+
+/* Tool Sidebar */
+.tool-sidebar {
+  background: var(--bg-panel);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 12px;
+  overflow-y: auto;
+}
+
+.sidebar-header {
+  font-size: 13px;
+  color: var(--accent);
+  font-weight: 600;
+  margin-bottom: 10px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--border);
+}
+
+.sidebar-tools {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.sidebar-tool-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 10px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: var(--transition);
+  border: 1px solid transparent;
+}
+
+.sidebar-tool-btn:hover {
+  background: var(--bg-card-hover);
+  border-color: var(--border);
+}
+
+.sidebar-tool-icon { font-size: 16px; width: 24px; text-align: center; }
+.sidebar-tool-name { font-size: 12px; color: var(--text); }
+
+/* ========== Tools Page ========== */
+.tools-hero {
+  text-align: center;
+  margin-bottom: 24px;
+}
+
+.tools-hero h2 { font-size: 22px; color: var(--accent); margin-bottom: 8px; }
+.tools-hero p { color: var(--text-dim); font-size: 14px; }
+
+.tools-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 14px;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.tool-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 20px;
+  cursor: pointer;
+  transition: var(--transition);
+  text-align: center;
+}
+
+.tool-card:hover {
+  border-color: var(--accent);
+  transform: translateY(-1px);
+}
+
+.tool-card-icon { font-size: 32px; margin-bottom: 8px; }
+.tool-card-name { font-size: 15px; font-weight: 600; margin-bottom: 4px; }
+.tool-card-desc { font-size: 12px; color: var(--text-dim); }
+
+/* Tool Runner */
+.tool-runner {
+  margin-top: 20px;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.tool-runner-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 14px;
+}
+
+.tool-runner-header h3 { font-size: 16px; }
+
+.tool-runner-body {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.tool-output {
+  padding: 14px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+}
+
+.tool-output-desc {
+  font-size: 12px;
+  color: var(--text-dim);
+  margin-top: 6px;
+}
+
 /* ========== Pro View ========== */
 .pro-layout {
   display: flex;
