@@ -28,64 +28,101 @@ body {
   overflow: hidden;
 }
 
-/* ========== Top Bar ========== */
-.top-bar {
+/* ========== App Shell ========== */
+.app-shell {
   display: flex;
+  height: 100vh;
+  overflow: hidden;
+}
+
+/* ========== Toolbar (Left Rail) ========== */
+.toolbar {
+  display: flex;
+  flex-direction: column;
   align-items: center;
-  justify-content: space-between;
-  padding: 10px 20px;
+  width: 64px;
   background: var(--bg-panel);
-  border-bottom: 1px solid var(--border);
-  flex-shrink: 0;
-}
-
-.top-bar-left {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.app-title {
-  font-size: 18px;
-  font-weight: 700;
-  color: var(--accent);
-}
-
-.ws-indicator {
-  font-size: 10px;
-}
-
-body.ws-connected .ws-indicator { color: var(--green); }
-body.ws-disconnected .ws-indicator { color: var(--text-dim); }
-
-.top-bar-tabs {
-  display: flex;
+  border-right: 1px solid var(--border);
+  padding: 10px 0;
   gap: 4px;
+  flex-shrink: 0;
+  overflow-y: auto;
 }
 
-.tab-btn {
-  padding: 6px 16px;
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  background: transparent;
-  color: var(--text-dim);
+.toolbar-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+  width: 52px;
+  padding: 8px 4px;
+  border-radius: 8px;
   cursor: pointer;
-  font-size: 14px;
   transition: var(--transition);
+  border: 1px solid transparent;
+  text-align: center;
 }
 
-.tab-btn:hover { border-color: var(--accent); color: var(--text); }
-.tab-btn.active { background: var(--accent-dim); border-color: var(--accent); color: #fff; }
+.toolbar-item:hover {
+  background: var(--bg-card-hover);
+  border-color: var(--border);
+}
 
-/* ========== Main Content ========== */
-.main-content {
+.toolbar-item.active {
+  background: var(--bg-card);
+  border-color: var(--accent);
+}
+
+.toolbar-icon { font-size: 20px; }
+.toolbar-label { font-size: 9px; color: var(--text-dim); white-space: nowrap; }
+
+.toolbar-item.active .toolbar-label { color: var(--accent); }
+
+.toolbar-divider {
+  width: 32px;
+  height: 1px;
+  background: var(--border);
+  margin: 6px 0;
+}
+
+.toolbar-spacer { flex: 1; }
+
+.toolbar-ws {
+  font-size: 8px;
+  padding-bottom: 8px;
+  color: var(--text-dim);
+}
+
+.ws-connected .toolbar-ws { color: var(--green); }
+
+/* ========== Workspace ========== */
+.workspace {
   flex: 1;
-  overflow: auto;
-  padding: 20px;
+  overflow-y: auto;
+  padding: 24px;
 }
 
-.tab-panel { display: none; }
-.tab-panel.active { display: block; }
+.workspace-pro {
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+}
+
+.tool-workspace {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.tool-hero {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.tool-hero h2 { font-size: 22px; color: var(--accent); margin-bottom: 6px; }
+.tool-hero p { color: var(--text-dim); font-size: 14px; }
+
+/* Remove old top-bar/tab styles — replaced by toolbar */
+.top-bar, .top-bar-tabs, .tab-btn, .tab-panel { display: none; }
 
 /* ========== Flow Cards (Simple View) ========== */
 .flow-cards {

@@ -7,106 +7,53 @@
   <link rel="stylesheet" href="css/studio.css">
 </head>
 <body class="ws-disconnected">
-  <header class="top-bar">
-    <div class="top-bar-left">
-      <h1 class="app-title">🎬 AI Story Studio</h1>
-      <span class="ws-indicator" id="wsIndicator" title="WebSocket">⚫</span>
-    </div>
-    <nav class="top-bar-tabs">
-      <button class="tab-btn active" data-tab="market" onclick="switchTab('market')">🏪 市场</button>
-      <button class="tab-btn" data-tab="tools" onclick="switchTab('tools')">🔧 工具</button>
-      <button class="tab-btn" data-tab="pro" onclick="switchTab('pro')">🟣 专业</button>
-      <button class="tab-btn" data-tab="config" onclick="switchTab('config')">⚙️ 配置</button>
+  <div class="app-shell">
+    <!-- Left Toolbar -->
+    <nav class="toolbar" id="toolbar">
+      <div class="toolbar-item active" data-tool="storyboard" onclick="switchTool('storyboard')" title="故事板">
+        <span class="toolbar-icon">🎬</span>
+        <span class="toolbar-label">故事板</span>
+      </div>
+      <div class="toolbar-item" data-tool="character" onclick="switchTool('character')" title="角色设计">
+        <span class="toolbar-icon">👤</span>
+        <span class="toolbar-label">角色</span>
+      </div>
+      <div class="toolbar-item" data-tool="scene" onclick="switchTool('scene')" title="场景概念">
+        <span class="toolbar-icon">🏞️</span>
+        <span class="toolbar-label">场景</span>
+      </div>
+      <div class="toolbar-item" data-tool="video" onclick="switchTool('video')" title="分镜转视频">
+        <span class="toolbar-icon">🎥</span>
+        <span class="toolbar-label">视频</span>
+      </div>
+      <div class="toolbar-item" data-tool="poster" onclick="switchTool('poster')" title="海报">
+        <span class="toolbar-icon">🎨</span>
+        <span class="toolbar-label">海报</span>
+      </div>
+      <div class="toolbar-item" data-tool="allinone" onclick="switchTool('allinone')" title="一键全来">
+        <span class="toolbar-icon">⚡</span>
+        <span class="toolbar-label">全来</span>
+      </div>
+      <div class="toolbar-divider"></div>
+      <div class="toolbar-item" data-tool="pro" onclick="switchTool('pro')" title="专业画布">
+        <span class="toolbar-icon">🟣</span>
+        <span class="toolbar-label">专业</span>
+      </div>
+      <div class="toolbar-item" data-tool="config" onclick="switchTool('config')" title="配置">
+        <span class="toolbar-icon">⚙️</span>
+        <span class="toolbar-label">配置</span>
+      </div>
+      <div class="toolbar-spacer"></div>
+      <div class="toolbar-ws" id="toolbarWs" title="连接状态">⚫</div>
     </nav>
-  </header>
 
-  <main class="main-content">
-    <!-- ===== Market View ===== -->
-    <section class="tab-panel active" id="marketView">
-      <div class="market-layout">
-        <!-- Main area -->
-        <div class="market-main">
-          <!-- Story input -->
-          <div class="story-input-area">
-            <textarea id="storyInput" class="story-textarea"
-              placeholder="📝 粘贴你的故事、小说段落、剧本片段..."
-              rows="4"></textarea>
-            <div class="story-actions">
-              <span class="story-hint">AI 会在你输入后自动推荐风格</span>
-            </div>
-          </div>
+    <!-- Main Workspace -->
+    <main class="workspace" id="workspace">
+      <!-- Content rendered dynamically by tool switch -->
+    </main>
+  </div>
 
-          <!-- AI Recommendations -->
-          <div class="recommendations" id="aiRecommendations" style="display:none"></div>
-
-          <!-- Style Gallery -->
-          <div class="style-section">
-            <div class="section-header">
-              <h2>🎨 风格画廊</h2>
-              <span class="section-hint">选一个喜欢的风格 — 53种可选</span>
-            </div>
-            <div class="style-gallery" id="styleGallery"></div>
-          </div>
-
-          <!-- Action buttons -->
-          <div class="market-actions">
-            <button class="btn btn-primary btn-lg" id="btnGenerate" disabled
-              onclick="window.marketView.generateStoryboard()">
-              🎬 生成分镜
-            </button>
-            <button class="btn btn-lg" id="btnAllInOne" disabled
-              onclick="window.marketView.generateAll()">
-              ⚡ 一键全来
-            </button>
-            <span class="selection-status" id="selectionStatus">👆 先选一个风格</span>
-          </div>
-
-          <!-- Output area -->
-          <div class="output-area" id="outputArea" style="display:none">
-            <div class="section-header">
-              <h2>📋 产出</h2>
-            </div>
-            <div class="output-grid" id="outputGrid"></div>
-          </div>
-        </div>
-
-        <!-- Tool Sidebar -->
-        <aside class="tool-sidebar" id="toolSidebar"></aside>
-      </div>
-    </section>
-
-    <!-- ===== Tools View ===== -->
-    <section class="tab-panel" id="toolsView">
-      <div class="tools-hero">
-        <h2>🔧 工具箱</h2>
-        <p>选择一个工具，输入内容，AI 帮你生成。</p>
-      </div>
-      <div class="tools-grid" id="toolsGrid"></div>
-      <!-- Tool detail / workflow runner -->
-      <div class="tool-runner" id="toolRunner" style="display:none"></div>
-    </section>
-
-    <!-- ===== Pro View ===== -->
-    <section class="tab-panel" id="proView">
-      <div class="pro-layout">
-        <div class="canvas-area">
-          <svg id="canvasSvg" class="flow-canvas"></svg>
-        </div>
-        <aside class="node-library" id="nodeLibrary"></aside>
-      </div>
-      <div class="pro-toolbar">
-        <button class="btn" onclick="window.proView.loadPresetFlow()">📋 加载预设流程</button>
-        <button class="btn btn-primary" onclick="window.proView.runWorkflow()">▶ 运行</button>
-        <button class="btn" onclick="window.proView.clearCanvas()">🗑 清空</button>
-        <button class="btn" onclick="window.proView.saveAsCustom()">💾 保存为我的流程</button>
-      </div>
-    </section>
-
-    <!-- ===== Config View ===== -->
-    <section class="tab-panel" id="configView"></section>
-  </main>
-
-  <!-- Chat Bar (pro view) -->
+  <!-- Chat Bar (pro tool) -->
   <div class="chat-bar" id="chatBarContainer" style="display:none">
     <input type="text" id="chatInput" class="chat-input" placeholder="💬 /help 查看命令，或直接打字..." />
     <button class="btn btn-send" id="chatSendBtn">发送</button>
@@ -117,8 +64,8 @@
 
   <!-- Scripts -->
   <script src="js/api-client.js"></script>
-  <script src="js/sidebar-tools.js"></script>
   <script src="js/market-view.js"></script>
+  <script src="js/sidebar-tools.js"></script>
   <script src="js/node-library.js"></script>
   <script src="js/canvas.js"></script>
   <script src="js/pro-view.js"></script>
