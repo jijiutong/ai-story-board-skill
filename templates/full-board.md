@@ -1,8 +1,8 @@
 # 全案板（完整）模板
 
-## 使用说明
+## 适用场景
 
-这是信息密度最高的格式，包含项目总览、角色设定、核心场景、分镜表、技术参数等全部模块。适合完整项目提案和前期视觉开发。
+信息密度最高的格式，包含项目总览、角色设定、核心场景、分镜表、技术参数等全部模块。适合完整项目提案、前期视觉开发、投资 pitch deck。
 
 ## Prompt 模板
 
@@ -29,3 +29,85 @@
 
 质量要求：ultra-detailed, professional film production layout, cinematic shot, film grain, 8K, sharp focus, coherent character design, consistent costume, clean layout, no watermark, no logo, no random large text, no garbled Chinese, no broken faces, no duplicated limbs, no messy panels, no low-quality collage, no text overlay, no flat illustration。
 ```
+
+## 完整示例 — 全案板
+
+### 输入
+修仙世界，两位剑修在剑冢对决，他们曾经是师徒
+
+### 提取变量
+- 片名：剑冢决
+- VS编号：VS3 东方玄幻
+- EC编号：EC7 复仇
+- CN编号：CN8 复仇红黑
+- EV编号：EV23 剑冢
+- HE编号：HE3 唐代
+- BL编号：BL3 战斗姿态
+- PR编号：PR1 长剑
+- WT编号：WT6 灵气粒子
+- ME编号：ME7 愤怒 + ME15 悲伤
+- CP编号：CP1 三分法对峙
+- DR编号：DR4 重音爆发
+- SD编号：SE17 风沙 + FX15 剑鸣
+- 关系：R3 师徒反目
+
+### 输出 Prompt（核心变量填充示例）
+
+```
+请生成一张电影级漫剧视觉开发板 / 专业导演分镜全案板，
+主题为《剑冢决》，故事核心：曾经的师徒在剑冢拔剑相向，恩断义绝。
+
+整体风格：VS3 东方玄幻，史诗、悲壮、宿命感，配色 墨黑 + 血红 + 暗金。
+
+顶部项目总览栏：片名《剑冢决》、时长 15秒、类型 玄幻/动作、
+调性 史诗悲壮、版本 V1.0、关键词 师徒反目/剑冢/宿命。
+
+角色设定栏：
+主角 陆沉（师父），年龄 45，体型 削瘦但挺拔，面部 剑眉深目/法令纹深/鬓角微白，
+发型 半束半散灰白长发，眼睛 深褐/眼尾下垂/饱经沧桑，肤色 古铜，声音 低哑沉稳，
+体态 微驼/步伐沉稳，习惯动作 抚摸剑身，服装 青灰长衫破损边缘/内衬暗红，
+配饰 腰间旧玉佩（徒儿当年所赠），随身物品 酒葫芦，气味 松木+铁锈，
+情绪底色 悲悯+愧疚，关系标记 R3 师徒反目（杀意下压着不忍）；
+展示正面、侧面、背面三视图 + 面部 close-up（ME15 悲伤+ME7 愤怒交织）+ 道具特写（PR1 长剑「断念」剑身古铭文）。
+对手 韩霜（徒弟），年龄 23，体型 精悍矫健，面部 剑眉星目/眼神锋利/嘴角微扬，
+发型 高束黑发马尾，眼睛 浅琥珀色/直视不退，肤色 小麦，声音 清脆锋利，
+体态 挺拔如剑/步伐如猎豹，习惯动作 甩剑花，服装 黑色紧身武服+暗红腰带，
+配饰 颈间师父传的剑穗，武器能力 PR1 长剑「破晓」寒光似冰，压迫感 年轻气盛+杀意纯粹；
+展示正面、侧面、背面三视图 + 面部 close-up + 核心能力/武器特写。
+身体语言：主角 BL3 防御格挡姿态，对手 BL33 全力挥剑姿态。
+
+核心场景概念图：EV23 剑冢，HE3 唐代古战场，时间 黄昏+阴云，
+WT6 灵气粒子 金色+暗紫色在空中交织，MT25 石碑/MT10 锈蚀铁剑/MT4 青苔，
+氛围 悲壮、宿命、剑意纵横。构图 CP1 三分法对峙。
+CR21 剑灵 若有若无的剑意人形漂浮。文化精准度：HE3 唐代剑修文化。
+
+分镜序列表：7 镜（EC7 复仇曲线：平静对峙→试探交锋→激烈搏杀→致命一击→回忆闪回→痛苦抉择→余韵）...
+[后续 7 镜详细描述]
+
+镜头语言：ARRI ALEXA 35 / 35mm anamorphic / 2.39:1 cinematic crop / shallow depth of field。
+
+底部技术规范：色卡 CN8 复仇红黑(8色) + 材质参考 MT25/MT10/MT4 +
+天气效果 WT6 + 身体语言 BL3/BL33 + SD: SE17 风沙+FX15 剑鸣。
+```
+
+## 变量说明
+
+| 变量来源 | 参考文件 | 填充规则 |
+|---------|---------|---------|
+| 片名 | — | Step 1 提取，2-8 字 |
+| VS编号 | `references/styles.md` | 智能推荐→用户确认 |
+| EC编号 | `references/emotion-curve.md` | 类型→EC编号自动匹配 |
+| CN编号 | `references/color-narrative.md` | EC→CN自动推导 |
+| EV编号 | `references/environments.md` | 故事场景→环境编号 |
+| HE编号 | `references/historical-eras.md` | 故事时代→时代编号 |
+| BL编号 | `references/body-language.md` | 角色状态→姿态编号 |
+| PR编号 | `references/props.md` | 武器/道具→道具编号 |
+| WT编号 | `references/weather.md` | 天气→天气编号 |
+| ME编号 | `references/micro-expressions.md` | 情绪→表情编号 |
+| CP编号 | `references/composition.md` | 场景→构图编号 |
+| DR编号 | `references/dialogue-rhythm.md` | 台词→节奏编号 |
+| SD编号 | `references/sound-design.md` | 场景→声音编号 |
+| 关系编号(R) | `references/relationships.md` | 角色互动→关系编号 |
+| MT编号 | `references/materials.md` | 场景→材质编号 |
+| CR编号 | `references/creatures.md` | 生物→生物编号 |
+| 镜数 | — | 短篇 7 镜 / 中篇 10 镜 / 史诗 13 镜 |
