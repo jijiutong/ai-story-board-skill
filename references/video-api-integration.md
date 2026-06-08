@@ -13,10 +13,8 @@ ARK_API_KEY=xxxxxxxxxxxx
 # Runway Gen-4.5
 RUNWAY_API_KEY=key_xxxxxxxxxxxx
 
-# 可灵 Kling (阿里云百炼 / KlingAI 官方)
+# 可灵 Kling (阿里云百炼)
 KLING_API_KEY=xxxxxxxxxxxx
-# 或阿里云百炼
-DASHSCOPE_API_KEY=sk-xxxxxxxxxxxx
 
 # Luma Dream Machine
 LUMAAI_API_KEY=xxxxxxxxxxxx
@@ -99,7 +97,7 @@ curl -X POST "https://api.dev.runwayml.com/v1/text_to_video" \
 const response = await fetch("https://dashscope.aliyuncs.com/api/v1/services/aigc/video-generation/video-synthesis", {
   method: "POST",
   headers: {
-    "Authorization": `Bearer ${process.env.DASHSCOPE_API_KEY}`,
+    "Authorization": `Bearer ${process.env.KLING_API_KEY}`,
     "Content-Type": "application/json",
     "X-DashScope-Async": "enable"
   },

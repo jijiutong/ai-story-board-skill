@@ -57,8 +57,6 @@ const imageUrl = result.data[0].url;
 
 ---
 
----
-
 ## 二、Nano Banana (Google Gemini Image)
 
 Google Gemini 图片生成，代号 Nano Banana。当前支持 v1 (Gemini 2.0 Flash) 和 v2 (Gemini 3.1 Flash)。

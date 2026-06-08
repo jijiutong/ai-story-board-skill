@@ -287,9 +287,17 @@ AI：【GPT Image 2 版本】[中文完整描述]
 | `用 Nano Banana 生成 [格式]` | 调 Gemini API 出图 |
 | `用 GPT Image 生成 [格式]` | 调 DALL-E 3 API 出图 |
 | `用 Flux 生成 [格式]` | 调 Replicate API 出图 |
+| `用 Ideogram 生成 [格式]` | 调 Ideogram API 出图 |
+| `用 通义万相 生成 [格式]` | 调 DashScope API 出图 |
+| `用 ComfyUI 生成 [格式]` | 调本地 ComfyUI 出图 |
+| `用 SD 生成 [格式]` | 调 Stability AI API 出图 |
+| `用 Recraft 生成 [格式]` | 调 Recraft API 出图 |
 | `用 Seedance 生成视频` | 调火山引擎 Ark 出片 |
 | `用 Runway 生成视频` | 调 Runway API 出片 |
 | `用 可灵 生成视频` | 调 DashScope API 出片 |
+| `用 Luma 生成视频` | 调 Luma API 出片 |
+| `用 Pika 生成视频` | 调 fal.ai Pika 出片 |
+| `配置 API` | 查看 API Key 配置方式 |
 
 ---
 
