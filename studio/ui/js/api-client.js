@@ -1,5 +1,5 @@
 // api-client.js — API + WebSocket client
-const API_BASE = 'http://localhost:3000/api';
+const API_BASE = 'http://localhost:9999/api';
 
 const api = {
   async startWorkflow(options) {
@@ -62,7 +62,7 @@ const wsCallbacks = [];
 
 function connectWebSocket() {
   try {
-    ws = new WebSocket('ws://localhost:3000');
+    ws = new WebSocket('ws://localhost:9999');
     ws.onopen = () => {
       console.log('WS connected');
       document.body.classList.add('ws-connected');

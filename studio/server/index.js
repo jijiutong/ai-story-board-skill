@@ -69,7 +69,7 @@ function broadcastProgress(data) {
 }
 
 // Start
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 9999;
 server.listen(PORT, () => {
   console.log(`\n🎬 AI Story Studio running at http://localhost:${PORT}\n`);
   const { exec } = require('child_process');

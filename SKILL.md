@@ -999,7 +999,7 @@ no text garbling, no watermark, no logo, no subtitles mismatch。
 - **用户说"启动画布"/"打开工作室"/"start"** → 执行以下步骤：
   1. 检查 `studio/node_modules` 是否存在，如果不存在则执行 `cd studio && npm install`
   2. 执行 `cd studio && node server/index.js` 启动本地服务
-  3. 服务启动后自动打开浏览器访问 `http://localhost:3000`
+  3. 服务启动后自动打开浏览器访问 `http://localhost:9999`
   4. 告知用户：「🎬 AI Story Studio 已启动，在浏览器中操作画布。这里继续对话处理故事。」
 
 - **用户说"配置 API"** → 引导用户在 Studio 的 Config 面板（⚙️ 标签）中可视化编辑 API Key，或直接编辑 Vault 根目录的 `config.yml`
