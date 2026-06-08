@@ -9,6 +9,9 @@
 在项目根目录创建 `.env` 文件（或直接设置环境变量）：
 
 ```bash
+# GPT Image (OpenAI DALL-E 3)
+OPENAI_API_KEY=sk-xxxxxxxxxxxx
+
 # Flux (via Replicate)
 REPLICATE_API_TOKEN=r8_xxxxxxxxxxxx
 
@@ -27,7 +30,34 @@ COMFYUI_BASE_URL=http://127.0.0.1:8188
 
 ---
 
-## 一、Flux (via Replicate)
+## 一、GPT Image (OpenAI DALL-E 3)
+
+```javascript
+const response = await fetch("https://api.openai.com/v1/images/generations", {
+  method: "POST",
+  headers: {
+    "Authorization": `Bearer ${process.env.OPENAI_API_KEY}`,
+    "Content-Type": "application/json"
+  },
+  body: JSON.stringify({
+    model: "dall-e-3",
+    prompt: `[中文 prompt]`,
+    n: 1,
+    size: "1792x1024",  // 16:9, 也可 1024x1024 / 1024x1792
+    quality: "hd",
+    style: "vivid"       // vivid=鲜艳, natural=自然
+  })
+});
+
+const result = await response.json();
+const imageUrl = result.data[0].url;
+```
+
+**适用场景**：中文 prompt 原生支持，复杂排版（全案板/漫画分镜/情绪板），文字渲染能力强
+
+---
+
+## 二、Flux (via Replicate)
 
 **模型**：`black-forest-labs/flux-1.1-pro` / `flux-dev` / `flux-schnell`
 
@@ -61,7 +91,7 @@ const imageUrl = await pollPrediction(result.id);
 
 ---
 
-## 二、Ideogram
+## 三、Ideogram
 
 ```javascript
 const response = await fetch("https://api.ideogram.ai/generate", {
@@ -89,7 +119,7 @@ const imageUrl = result.data[0].url;
 
 ---
 
-## 三、通义万相 (Alibaba Cloud DashScope)
+## 四、通义万相 (Alibaba Cloud DashScope)
 
 ```javascript
 const response = await fetch("https://dashscope.aliyuncs.com/api/v1/services/aigc/text2image/image-synthesis", {
@@ -121,7 +151,7 @@ const imageUrl = taskResult.output.results[0].url;
 
 ---
 
-## 四、ComfyUI (本地)
+## 五、ComfyUI (本地)
 
 ```javascript
 // 1. 提交工作流
@@ -146,7 +176,7 @@ const imageUrl = `${COMFYUI_BASE_URL}/view?filename=${result.filename}`;
 
 ---
 
-## 五、Recraft
+## 六、Recraft
 
 ```javascript
 const response = await fetch("https://api.recraft.ai/v1/images/generations", {
@@ -189,7 +219,7 @@ AI 调用对应平台 API（用 node_repl MCP）
 
 | 需求 | 推荐平台 |
 |------|---------|
-| 中文 prompt、排版复杂 | GPT Image 2/3 |
+| 中文 prompt、排版复杂（全案板/漫画/情绪板） | GPT Image (DALL-E 3) |
 | 高质量单图、角色卡 | Flux (Replicate) |
 | 文字排版海报 | Ideogram |
 | 古风/国风/东方 | 通义万相 |
@@ -201,6 +231,7 @@ AI 调用对应平台 API（用 node_repl MCP）
 
 | 平台 | 单价 | 
 |------|------|
+| GPT Image (DALL-E 3 HD) | ~$0.08/张 |
 | Flux Pro (Replicate) | ~$0.05/张 |
 | Flux Schnell | ~$0.003/张 |
 | Ideogram | ~$0.04/张 |
