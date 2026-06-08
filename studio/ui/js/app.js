@@ -161,13 +161,11 @@ function switchTool(tool) {
 }
 
 // ---- Theme Toggle ----
-function toggleTheme() {
-  const html = document.documentElement;
-  const icon = document.getElementById('themeIcon');
-  const isDark = html.dataset.theme !== 'light';
-  html.dataset.theme = isDark ? 'light' : 'dark';
-  if (icon) icon.textContent = isDark ? '☀️' : '🌙';
-  localStorage.setItem('studio-theme', isDark ? 'light' : 'dark');
+function setTheme(name) {
+  document.documentElement.dataset.theme = name;
+  localStorage.setItem('studio-theme', name);
+  // Re-render config panel to update active state
+  if (currentTool === 'config' && window.configPanel) window.configPanel.render();
 }
 
 (function initTheme() {

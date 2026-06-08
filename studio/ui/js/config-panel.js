@@ -8,10 +8,25 @@ class ConfigPanel {
     try { config = await api.getConfig(); }
     catch (e) { config = { platforms: {}, image_platforms: {}, defaults: {}, preferences: {} }; }
 
+    const currentTheme = document.documentElement.dataset.theme || 'dark';
     container.innerHTML = `
       <div class="config-panel">
         <h2>⚙️ 配置</h2>
         <p class="config-path">config.yml → Obsidian Vault 根目录</p>
+
+        <section class="config-section">
+          <h3>🎨 界面主题</h3>
+          <div style="display:flex;gap:12px">
+            <label class="theme-option ${currentTheme === 'dark' ? 'theme-active' : ''}" onclick="setTheme('dark')">
+              <span class="theme-preview-dark"></span>
+              <span>暗色</span>
+            </label>
+            <label class="theme-option ${currentTheme === 'light' ? 'theme-active' : ''}" onclick="setTheme('light')">
+              <span class="theme-preview-light"></span>
+              <span>白色</span>
+            </label>
+          </div>
+        </section>
 
         <section class="config-section">
           <h3>📁 Obsidian Vault 路径</h3>
