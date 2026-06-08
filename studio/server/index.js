@@ -16,14 +16,22 @@ const app = express();
 const server = http.createServer(app);
 const wss = new WebSocketServer({ server });
 
-// Determine vault path from env or cwd
-const vaultPath = process.env.OBSIDIAN_VAULT || process.cwd();
+// Determine vault path: config.yml > env var > cwd
+const configManager = new ConfigManager(process.cwd());
+configManager.load();
+const configVaultPath = configManager.get('vault_path');
+const vaultPath = configVaultPath || process.env.OBSIDIAN_VAULT || process.cwd();
 console.log(`Vault path: ${vaultPath}`);
+
+// Re-init configManager with correct vault path if it differs
+if (configVaultPath && configVaultPath !== process.cwd()) {
+  configManager.vaultPath = configVaultPath;
+  configManager.configPath = require('path').join(configVaultPath, 'config.yml');
+  configManager.load();
+}
 
 // Initialize services
 const vaultReader = new VaultReader(vaultPath);
-const configManager = new ConfigManager(vaultPath);
-configManager.load();
 const apiProxy = new APIProxy(configManager);
 const workflowEngine = new WorkflowEngine();
 const skillBridge = new SkillBridge({

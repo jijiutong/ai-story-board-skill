@@ -354,10 +354,13 @@ body {
 .rec-card.rec-primary { border-color: var(--accent-dim); background: rgba(232, 168, 80, 0.05); }
 
 .rec-rank { font-size: 11px; color: var(--accent); margin-bottom: 6px; font-weight: 600; }
-.rec-style { display: flex; align-items: center; gap: 8px; margin-bottom: 4px; }
+.rec-style { display: flex; align-items: center; gap: 8px; margin-bottom: 4px; flex-wrap: wrap; }
 .rec-emoji { font-size: 20px; }
 .rec-name { font-size: 14px; font-weight: 600; }
-.rec-reason { font-size: 11px; color: var(--text-dim); line-height: 1.4; }
+.rec-format { font-size: 11px; padding: 2px 8px; background: rgba(232,168,80,0.15); color: var(--accent); border-radius: 10px; }
+.rec-score { font-size: 10px; color: var(--green); }
+.rec-reason { font-size: 11px; color: var(--text-dim); line-height: 1.5; margin-top: 6px; }
+.rec-card.rec-selected { border-color: var(--accent); box-shadow: 0 0 0 2px rgba(232, 168, 80, 0.3); }
 
 /* Market actions */
 .market-actions {

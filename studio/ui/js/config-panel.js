@@ -14,6 +14,15 @@ class ConfigPanel {
         <p class="config-path">config.yml → Obsidian Vault 根目录</p>
 
         <section class="config-section">
+          <h3>📁 Obsidian Vault 路径</h3>
+          <div class="config-field">
+            <label>Vault 根目录（故事/角色/场景都在这里）</label>
+            <input type="text" id="cfg-vault-path" value="${config.vault_path || config.defaults?.vault_path || ''}" placeholder="/Users/xxx/Obsidian/我的小说" />
+          </div>
+          <p style="font-size:11px;color:var(--text-dim);margin-top:4px">修改后需重启服务生效。留空则使用当前工作目录。</p>
+        </section>
+
+        <section class="config-section">
           <h3>🎥 视频平台 API Key</h3>
           ${['seedance', 'runway', 'kling', 'luma', 'pika'].map(k => `
             <div class="config-field">
@@ -55,6 +64,10 @@ class ConfigPanel {
     document.getElementById('cfgSaveBtn').onclick = async () => {
       const updated = { platforms: {}, image_platforms: {}, defaults: {} };
 
+      // Vault path
+      const vaultEl = document.getElementById('cfg-vault-path');
+      if (vaultEl && vaultEl.value) updated.vault_path = vaultEl.value;
+
       ['seedance', 'runway', 'kling', 'luma', 'pika'].forEach(k => {
         const el = document.getElementById(`cfg-video-${k}`);
         if (el && el.value) updated.platforms[k] = { key: el.value };
@@ -70,7 +83,7 @@ class ConfigPanel {
 
       try {
         await api.updateConfig(updated);
-        alert('配置已保存 ✅');
+        alert('配置已保存 ✅' + (updated.vault_path ? '\nVault 路径已更新，重启服务生效。' : ''));
       } catch (e) {
         alert('保存失败: ' + e.message);
       }
