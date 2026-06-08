@@ -367,7 +367,19 @@ HE3 中国古风 | TR1 快切 | SD: SE2雨声+FX15剑鸣
 【Seedance 视频生成流程】
 1. 准备素材：故事板（主参考）+ 场景参考图 + 光照材质参考图 + 道具细节卡 + 首尾帧 + 角色卡 + 视频分镜图 3-4 张 — 全部 6 层锁死
 2. 生成视频 prompt（回复"出视频 prompt"）— AI 自动整合故事板全序列 + 全部锚点约束
-3. 输入 Seedance：prompt + 全部参考图（场景+光照材质+道具+首尾帧+角色卡+故事板+分镜图）
+3. 输入 Seedance：prompt + 全部参考图
+
+【Seedance 多图上传顺序】（顺序错误 = 锚点失效，必须严格排列）：
+```
+参考图 1（首位）：故事板合成图 — 主参考，定义视频运镜/节奏/时间线
+参考图 2：场景参考图 — 锁死背景/天空/空间布局
+参考图 3：光照材质参考图 — 锁死光线/阴影/纹理
+参考图 4：道具细节卡 — 锁死武器/配饰形制
+参考图 5：首尾帧（两张拼为一张）— 左侧帧1起始 + 右侧帧N结束
+参考图 6：角色设定卡 — 锁死面部/体态
+参考图 7-9（末位）：视频分镜图 3 张 — 画面锚点，按帧序排列
+```
+→ 原则：故事板首位定调 → 逐层锁死 → 分镜图末位防偏。不缺不漏不混序。
 4. 一次性生成完整视频（15s/30s），按故事板时间线自动剪辑
 5. 后期：加配音/字幕/音效/调色
 
@@ -396,6 +408,18 @@ HE3 中国古风 | TR1 快切 | SD: SE2雨声+FX15剑鸣
 - 适用场景：文生视频（Runway/Sora/可灵）、导演阐述、团队协作
 - 回复"出视频 prompt"默认压缩模式
 - 回复"详细模式"或"展开 prompt"切换详细模式
+
+【视频专属负面提示词】（自动附加到视频 prompt 尾部）：
+```
+no flickering, no frame flashing, no sudden brightness jumps, no color shifts,
+no morphing, no body distortion, no face melting, no limb warping, no extra fingers,
+no floating, no sliding feet, no hovering, no broken physics,
+no background shifting, no environment pop-in, no sky color change,
+no disappearing props, no weapon shape change, no accessory deformation,
+no clothing texture change, no fabric stiffness, no costume color drift,
+no broken continuity between frames, no jump cuts, no ghosting artifacts,
+no text garbling, no watermark, no logo, no subtitles mismatch。
+```
 ```
 
 **多平台深度输出**（用户指定时，见 `references/platform.md` + `references/platform-advanced.md`）：
@@ -538,6 +562,7 @@ HE3 中国古风 | TR1 快切 | SD: SE2雨声+FX15剑鸣
 - **生成视频分镜图 / 合并帧** → 多帧故事板转视频时，按动作阶段合并相邻帧（如7帧压成3张），每张覆盖2-3帧，作为画面锚点防止跑偏
 - **出视频 prompt** → 默认压缩模式（≤1500字），整合故事板全序列+所有锚点约束，直喂 Seedance
 - **详细模式 / 展开 prompt** → 切换为详细模式（3000+字），每帧完整叙事段落+音效+构图+转场+台词，适合 Runway/Sora/可灵
+- **视频负面提示词** → 自动附加到所有视频 prompt 尾部，防闪烁/扭曲/漂移/跳色/断连续性
 - **质量评分** → 0-100 分自动评估，低于 75 自动优化
 - **连续性检查** → 自动检查时间线/空间/角色/情绪连贯性，标注断裂点
 - **多画幅** → "适配小红书/抖音/朋友圈/所有平台" 自动切换画幅
