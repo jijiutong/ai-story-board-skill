@@ -6,9 +6,9 @@
 
 > 从故事到视觉，一条完整生产管线
 
-AI 视觉导演 — 将任意故事、小说、剧本转化为电影级视觉开发方案。45项核心能力，47个参考文件，覆盖从**输入→分析→生成→评分→检查→修改→导出→视频→行业格式**的完整制作流程。
+AI 视觉导演 — 将任意故事、小说、剧本转化为电影级视觉开发方案。45项核心能力，49个参考文件，覆盖从**输入→分析→生成→评分→检查→修改→导出→视频→行业格式**的完整制作流程。
 
-支持 GPT Image 2 / Midjourney v6 / Stable Diffusion XL / Sora / Runway / 可灵 / Seedance。
+支持 GPT Image 2 / Midjourney v6 / Stable Diffusion XL / Sora / Runway / 可灵 / Seedance，以及 9 个图片 API + 5 个视频 API 直接调用生成。
 
 ---
 
@@ -33,6 +33,9 @@ AI 视觉导演 — 将任意故事、小说、剧本转化为电影级视觉开
 
 ### 扩展能力（16项）
 36种生物设计 | 36种环境设计 | 46种道具器物 | 26种天气大气 | 46种身体语言 | 36种材质质感 | 36种动物设计 | 15种历史时代 | 视频 Prompt 适配 | 视频工作流 | 视频角色卡 | 文化精准度 | 导演阐述 | 多平台深度优化 | 负面词自动生成 | 转场与蒙太奇 | 声音设计
+
+### API 集成能力（2项）
+9 平台图片 API（GPT Image/Nano Banana/Flux/Ideogram/通义万相/ComfyUI/SD/Recraft） | 5 平台视频 API（Seedance/Runway/可灵/Luma/Pika）
 
 ---
 
@@ -281,6 +284,12 @@ AI：【GPT Image 2 版本】[中文完整描述]
 | `第X集` / `继续` | 续集模式 |
 | `缩略版` | 关键词版快速验证 |
 | `全平台` | GPT/MJ/SD 三平台 |
+| `用 Nano Banana 生成 [格式]` | 调 Gemini API 出图 |
+| `用 GPT Image 生成 [格式]` | 调 DALL-E 3 API 出图 |
+| `用 Flux 生成 [格式]` | 调 Replicate API 出图 |
+| `用 Seedance 生成视频` | 调火山引擎 Ark 出片 |
+| `用 Runway 生成视频` | 调 Runway API 出片 |
+| `用 可灵 生成视频` | 调 DashScope API 出片 |
 
 ---
 
@@ -290,6 +299,7 @@ AI：【GPT Image 2 版本】[中文完整描述]
 ai-visual-director/
 ├── SKILL.md                          # 主入口：工作流 + 能力矩阵 + 执行规则
 ├── README.md                         # 项目文档
+├── api-config.template.env           # API Key 配置模板（14 平台）
 ├── examples/                         # 示例效果图
 │   ├── rain-night-scene.jpg          # 都市场景示例
 │   ├── enemy-duel-board.jpg          # 玄幻对决示例
@@ -297,7 +307,7 @@ ai-visual-director/
 │   ├── wong-ghibli-fusion.jpg        # 风格融合示例
 │   ├── multi-version-compare.jpg     # 多版本对比示例
 │   └── full-pipeline.jpg             # 全管线示例
-├── references/                       # 参考文件（47个）
+├── references/                       # 参考文件（49个）
 │   ├── styles.md                     # 50+种视觉风格详细说明
 │   ├── fusion.md                     # 风格融合引擎
 │   ├── formats.md                    # 10种输出格式说明
@@ -344,6 +354,8 @@ ai-visual-director/
 │   ├── sound-design.md               # 声音设计（16环境音/20拟音/12音乐Mood）
 │   ├── animals.md                    # 36种动物设计（马匹/猛禽/野兽/神话）
 │   ├── historical-eras.md            # 15种历史时代（先秦→太空科幻）
+│   ├── api-integration.md             # 图片 API 集成（9 平台）
+│   ├── video-api-integration.md       # 视频 API 集成（5 平台）
 │   └── batch-chapter.md              # 批量故事处理
 └── templates/                        # 模板文件（7个）
     ├── full-board.md                 # 全案板完整模板
