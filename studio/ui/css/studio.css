@@ -1,6 +1,76 @@
 /* ========== Reset & Base ========== */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
+/* ========== Light Theme ========== */
+[data-theme="light"] {
+  --bg-deep: #f5f6f8;
+  --bg-panel: #ffffff;
+  --bg-card: #f0f1f4;
+  --bg-card-hover: #e8e9ee;
+  --border: #e0e2e8;
+  --border-strong: #ccced6;
+  --text: #1a1c24;
+  --text-dim: #6b7084;
+  --text-muted: #8b8fa0;
+  --accent: #d4882a;
+  --accent-dim: #b87020;
+  --cyan: #1a8a72;
+  --violet: #6b5ce7;
+  --green: #2a8a4a;
+  --red: #d04050;
+  --blue: #3a6ad4;
+  --shadow: 0 4px 20px rgba(0,0,0,0.08);
+  --shadow-soft: 0 2px 12px rgba(0,0,0,0.05);
+}
+
+[data-theme="light"] body {
+  background: #f5f6f8;
+  color: #1a1c24;
+}
+
+[data-theme="light"] .toolbar {
+  background: #ffffff;
+  border-right-color: #e0e2e8;
+}
+
+[data-theme="light"] .toolbar-item:hover {
+  background: rgba(0,0,0,0.04);
+}
+
+[data-theme="light"] .toolbar-item.active {
+  background: rgba(212,136,42,0.08);
+}
+
+[data-theme="light"] .workspace {
+  background: #f5f6f8;
+}
+
+[data-theme="light"] .style-card,
+[data-theme="light"] .rec-card,
+[data-theme="light"] .output-card,
+[data-theme="light"] .style-category,
+[data-theme="light"] .config-section,
+[data-theme="light"] .tool-hero {
+  background: #ffffff;
+  border-color: #e0e2e8;
+}
+
+[data-theme="light"] .story-textarea,
+[data-theme="light"] .chat-input,
+[data-theme="light"] .config-field input,
+[data-theme="light"] .config-field select {
+  background: #ffffff;
+  border-color: #e0e2e8;
+  color: #1a1c24;
+}
+
+[data-theme="light"] .btn {
+  background: #f0f1f4;
+  border-color: #ccced6;
+  color: #1a1c24;
+}
+
+/* ========== Dark Theme (Default) ========== */
 :root {
   --bg-deep: #08090d;
   --bg-panel: rgba(17, 19, 27, 0.88);

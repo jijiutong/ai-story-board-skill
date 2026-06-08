@@ -160,6 +160,23 @@ function switchTool(tool) {
   }
 }
 
+// ---- Theme Toggle ----
+function toggleTheme() {
+  const html = document.documentElement;
+  const icon = document.getElementById('themeIcon');
+  const isDark = html.dataset.theme !== 'light';
+  html.dataset.theme = isDark ? 'light' : 'dark';
+  if (icon) icon.textContent = isDark ? '☀️' : '🌙';
+  localStorage.setItem('studio-theme', isDark ? 'light' : 'dark');
+}
+
+(function initTheme() {
+  const saved = localStorage.getItem('studio-theme') || 'dark';
+  document.documentElement.dataset.theme = saved;
+  const icon = document.getElementById('themeIcon');
+  if (icon) icon.textContent = saved === 'light' ? '☀️' : '🌙';
+})();
+
 document.addEventListener('DOMContentLoaded', () => {
   switchTool('storyboard');
 });
