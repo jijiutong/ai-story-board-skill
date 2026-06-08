@@ -1,0 +1,484 @@
+/* ========== Reset & Base ========== */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg-deep: #0f0f1a;
+  --bg-panel: #1a1a2e;
+  --bg-card: #16213e;
+  --bg-card-hover: #1c2a4a;
+  --border: #2a2a4a;
+  --text: #e0e0e8;
+  --text-dim: #8888a0;
+  --accent: #e8a850;
+  --accent-dim: #c08030;
+  --green: #4caf84;
+  --red: #e05555;
+  --blue: #5588cc;
+  --radius: 10px;
+  --transition: 0.2s ease;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+  background: var(--bg-deep);
+  color: var(--text);
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+/* ========== Top Bar ========== */
+.top-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 20px;
+  background: var(--bg-panel);
+  border-bottom: 1px solid var(--border);
+  flex-shrink: 0;
+}
+
+.top-bar-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.app-title {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--accent);
+}
+
+.ws-indicator {
+  font-size: 10px;
+}
+
+body.ws-connected .ws-indicator { color: var(--green); }
+body.ws-disconnected .ws-indicator { color: var(--text-dim); }
+
+.top-bar-tabs {
+  display: flex;
+  gap: 4px;
+}
+
+.tab-btn {
+  padding: 6px 16px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: transparent;
+  color: var(--text-dim);
+  cursor: pointer;
+  font-size: 14px;
+  transition: var(--transition);
+}
+
+.tab-btn:hover { border-color: var(--accent); color: var(--text); }
+.tab-btn.active { background: var(--accent-dim); border-color: var(--accent); color: #fff; }
+
+/* ========== Main Content ========== */
+.main-content {
+  flex: 1;
+  overflow: auto;
+  padding: 20px;
+}
+
+.tab-panel { display: none; }
+.tab-panel.active { display: block; }
+
+/* ========== Flow Cards (Simple View) ========== */
+.flow-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 16px;
+  padding: 10px;
+}
+
+.flow-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 24px;
+  cursor: pointer;
+  transition: var(--transition);
+  text-align: center;
+}
+
+.flow-card:hover {
+  background: var(--bg-card-hover);
+  border-color: var(--accent);
+  transform: translateY(-2px);
+}
+
+.flow-card.default { border-color: var(--accent-dim); }
+
+.flow-card-icon { font-size: 36px; margin-bottom: 10px; }
+.flow-card-name { font-size: 16px; font-weight: 600; margin-bottom: 6px; }
+.flow-card-desc { font-size: 12px; color: var(--text-dim); }
+
+/* ========== Pipeline Steps (Simple View) ========== */
+.pipeline-header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.btn-back {
+  padding: 6px 12px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: transparent;
+  color: var(--text);
+  cursor: pointer;
+}
+
+.steps-flow {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  overflow-x: auto;
+  padding: 10px 0;
+}
+
+.phase-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.phase-group.parallel {
+  border: 1px dashed var(--accent-dim);
+  border-radius: var(--radius);
+  padding: 8px;
+}
+
+.step-arrow {
+  align-self: center;
+  color: var(--text-dim);
+  font-size: 14px;
+  flex-shrink: 0;
+}
+
+.step-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 14px;
+  width: 180px;
+  flex-shrink: 0;
+  transition: var(--transition);
+}
+
+.step-card.status-running { border-color: var(--blue); animation: pulse 1.5s infinite; }
+.step-card.status-completed { border-color: var(--green); }
+.step-card.status-failed { border-color: var(--red); }
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.7; }
+}
+
+.step-status-indicator { font-size: 18px; margin-bottom: 6px; }
+.step-label { font-size: 13px; font-weight: 500; }
+.step-preview { margin-top: 8px; }
+
+.step-thumb {
+  width: 100%;
+  max-height: 100px;
+  object-fit: cover;
+  border-radius: 4px;
+}
+
+.workflow-error {
+  color: var(--red);
+  padding: 10px;
+  margin-top: 10px;
+  background: rgba(224, 85, 85, 0.1);
+  border-radius: var(--radius);
+}
+
+/* ========== Pro View ========== */
+.pro-layout {
+  display: flex;
+  height: calc(100vh - 180px);
+  gap: 0;
+}
+
+.canvas-area {
+  flex: 1;
+  background: var(--bg-deep);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+
+.flow-canvas {
+  width: 100%;
+  height: 100%;
+}
+
+.canvas-node { cursor: move; }
+
+.node-body {
+  fill: var(--bg-card);
+  stroke: var(--border);
+  stroke-width: 1.5;
+}
+
+.canvas-node:hover .node-body {
+  stroke: var(--accent);
+  fill: var(--bg-card-hover);
+}
+
+.node-label {
+  fill: var(--text);
+  font-size: 12px;
+  pointer-events: none;
+}
+
+.port {
+  fill: var(--bg-card);
+  stroke: var(--text-dim);
+  stroke-width: 2;
+  cursor: crosshair;
+}
+
+.port:hover {
+  fill: var(--accent);
+  stroke: var(--accent);
+}
+
+.port-out:hover { cursor: pointer; }
+.port-in:hover { cursor: pointer; }
+
+.edge-line {
+  stroke: var(--text-dim);
+  stroke-width: 2;
+  pointer-events: none;
+}
+
+.status-dot.status-pending { fill: var(--text-dim); }
+.status-dot.status-running { fill: var(--blue); }
+.status-dot.status-completed { fill: var(--green); }
+.status-dot.status-failed { fill: var(--red); }
+
+.node-library {
+  width: 200px;
+  background: var(--bg-panel);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 12px;
+  overflow-y: auto;
+  flex-shrink: 0;
+}
+
+.node-library h3 {
+  font-size: 14px;
+  color: var(--accent);
+  margin-bottom: 12px;
+}
+
+.node-category { margin-bottom: 14px; }
+
+.node-category-title {
+  font-size: 11px;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  margin-bottom: 6px;
+  font-weight: 600;
+}
+
+.node-library-item {
+  padding: 6px 10px;
+  margin: 3px 0;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  font-size: 12px;
+  cursor: grab;
+  transition: var(--transition);
+  background: var(--bg-card);
+}
+
+.node-library-item:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.node-library-item:active { cursor: grabbing; }
+
+.pro-toolbar {
+  display: flex;
+  gap: 8px;
+  padding: 10px 0;
+  justify-content: center;
+}
+
+/* ========== Buttons ========== */
+.btn {
+  padding: 8px 16px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--bg-card);
+  color: var(--text);
+  cursor: pointer;
+  font-size: 13px;
+  transition: var(--transition);
+}
+
+.btn:hover { border-color: var(--accent); }
+
+.btn-primary {
+  background: var(--accent-dim);
+  border-color: var(--accent);
+  color: #fff;
+}
+
+.btn-primary:hover { background: var(--accent); }
+
+.btn-send {
+  background: var(--accent-dim);
+  border-color: var(--accent);
+  color: #fff;
+}
+
+/* ========== Config Panel ========== */
+.config-panel { max-width: 640px; }
+
+.config-panel h2 { font-size: 20px; color: var(--accent); margin-bottom: 4px; }
+.config-path { font-size: 12px; color: var(--text-dim); margin-bottom: 20px; }
+
+.config-section {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 16px;
+  margin-bottom: 16px;
+}
+
+.config-section h3 {
+  font-size: 14px;
+  color: var(--text);
+  margin-bottom: 12px;
+}
+
+.config-field {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-bottom: 10px;
+}
+
+.config-field label {
+  font-size: 12px;
+  color: var(--text-dim);
+}
+
+.config-field input, .config-field select {
+  padding: 8px 10px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: var(--bg-deep);
+  color: var(--text);
+  font-size: 13px;
+}
+
+.config-field input:focus, .config-field select:focus {
+  outline: none;
+  border-color: var(--accent);
+}
+
+.btn-save {
+  padding: 10px 24px;
+  background: var(--accent-dim);
+  border: 1px solid var(--accent);
+  border-radius: var(--radius);
+  color: #fff;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+/* ========== Chat Bar ========== */
+.chat-bar {
+  display: flex;
+  gap: 8px;
+  padding: 10px 20px;
+  background: var(--bg-panel);
+  border-top: 1px solid var(--border);
+  flex-shrink: 0;
+}
+
+.chat-bar.active { display: flex !important; }
+
+.chat-input {
+  flex: 1;
+  padding: 10px 14px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--bg-deep);
+  color: var(--text);
+  font-size: 14px;
+}
+
+.chat-input:focus { outline: none; border-color: var(--accent); }
+
+/* ========== Preview Overlay ========== */
+.preview-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.85);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.preview-content {
+  max-width: 90vw;
+  max-height: 90vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.preview-image, .preview-video {
+  max-width: 90vw;
+  max-height: 80vh;
+  border-radius: var(--radius);
+  border: 2px solid var(--border);
+}
+
+.preview-label {
+  font-size: 14px;
+  color: var(--text-dim);
+}
+
+.preview-content button {
+  padding: 8px 20px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--bg-card);
+  color: var(--text);
+  cursor: pointer;
+}
+
+/* ========== Run Status ========== */
+.run-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+  border-radius: var(--radius);
+  font-size: 12px;
+}
+.run-status.running { background: rgba(85,136,204,0.2); color: var(--blue); }
+.run-status.completed { background: rgba(76,175,132,0.2); color: var(--green); }
+.run-status.failed { background: rgba(224,85,85,0.2); color: var(--red); }
+
+/* ========== Scrollbar ========== */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: var(--text-dim); }

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Story Studio</title>
+  <link rel="stylesheet" href="css/studio.css">
+</head>
+<body class="ws-disconnected">
+  <header class="top-bar">
+    <div class="top-bar-left">
+      <h1 class="app-title">🎬 AI Story Studio</h1>
+      <span class="ws-indicator" id="wsIndicator" title="WebSocket">⚫</span>
+    </div>
+    <nav class="top-bar-tabs">
+      <button class="tab-btn active" data-tab="simple" onclick="switchTab('simple')">🟢 简单</button>
+      <button class="tab-btn" data-tab="pro" onclick="switchTab('pro')">🟣 专业</button>
+      <button class="tab-btn" data-tab="config" onclick="switchTab('config')">⚙️ 配置</button>
+    </nav>
+  </header>
+
+  <main class="main-content">
+    <!-- Simple View -->
+    <section class="tab-panel active" id="simpleViewContainer">
+      <div class="flow-cards" id="flowCards"></div>
+    </section>
+
+    <!-- Pro View -->
+    <section class="tab-panel" id="proViewContainer">
+      <div class="pro-layout">
+        <div class="canvas-area">
+          <svg id="canvasSvg" class="flow-canvas"></svg>
+        </div>
+        <aside class="node-library" id="nodeLibrary"></aside>
+      </div>
+      <div class="pro-toolbar">
+        <button class="btn" onclick="proView.loadPresetFlow()">📋 加载预设流程</button>
+        <button class="btn btn-primary" onclick="proView.runWorkflow()">▶ 运行</button>
+        <button class="btn" onclick="proView.clearCanvas()">🗑 清空</button>
+        <button class="btn" onclick="proView.saveAsCustom()">💾 保存为我的流程</button>
+      </div>
+    </section>
+
+    <!-- Config View -->
+    <section class="tab-panel" id="configPanelContainer"></section>
+  </main>
+
+  <!-- Chat Bar (pro view) -->
+  <div class="chat-bar" id="chatBarContainer" style="display:none">
+    <input type="text" id="chatInput" class="chat-input" placeholder="💬 对 AI 说说你的调整想法..." />
+    <button class="btn btn-send" id="chatSendBtn">发送</button>
+  </div>
+
+  <!-- Preview overlay -->
+  <div class="preview-overlay" id="previewPanelContainer" style="display:none"></div>
+
+  <!-- Scripts -->
+  <script src="js/api-client.js"></script>
+  <script src="js/simple-view.js"></script>
+  <script src="js/node-library.js"></script>
+  <script src="js/canvas.js"></script>
+  <script src="js/pro-view.js"></script>
+  <script src="js/config-panel.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
