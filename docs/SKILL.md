@@ -160,7 +160,7 @@ no cartoon style (unless specified), no flat illustration, no marketing poster s
 5. 场景锚点（空间+光源+氛围）
 6. 分镜表（N帧完整）
 7. 出图/视频 Prompt
-8. 技术参数总表 — 画幅/摄影机/焦段覆盖/景深策略/色彩系统（当用户指定电影级CG/超写实等高级需求时输出）
+8. 技术参数总表 — 画幅/摄影机/焦段覆盖/景深策略/色彩系统（一键生成结束时主动询问用户是否需要）
 
 ### 分镜表格式
 ```

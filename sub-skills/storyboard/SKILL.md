@@ -96,7 +96,7 @@ description: Quick storyboard generation — paste a story, get smart recommenda
 帧2 | ...
 帧N | ...
 
-【技术参数总表】（当用户指定电影级CG/超写实等高级需求时输出）
+【技术参数总表】（一键生成结束时主动询问用户是否需要输出此表）
 画幅：[16:9/9:16/2.39:1] | 风格：[名称] | 平台：[GPT Image/MJ/SD] | 摄影机：[型号]
 焦段覆盖：[18mm→135mm 逐镜标注] | 景深策略：[逐镜T值变化]
 色彩系统：[基底色温+主色调色号+暖色上限]
