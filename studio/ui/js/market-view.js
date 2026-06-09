@@ -373,134 +373,56 @@ class MarketView {
   }
 
   // ---- Generate ----
-  async generateStoryboard() {
-    if (!this.selectedStyle) { showToast('👆 请先在推荐区或画廊中选择一个风格'); return; }
-    const story = document.getElementById('storyInput')?.value?.trim() || this.storyText || '';
-    if (!story) { showToast('📝 请先粘贴故事'); return; }
-
-    this._setGenerating(true);
-    this._showOutput();
-
-    if (this.unsubscribe) this.unsubscribe();
-    this.unsubscribe = onProgress((data) => {
-      if (data.nodeId) {
-        this.nodeStatus[data.nodeId] = data;
-        this._updateOutput(data);
-      }
-    });
-
-    try {
-      const styleName = STYLES.find(s => s.id === this.selectedStyle);
-      const result = await api.startWorkflow({
-        flowFile: 'storyboard-only',
-        pastedStory: story,
-        style: styleName ? `${styleName.emoji} ${styleName.name}` : `VS${this.selectedStyle}`,
-        shotCount: 7
-      });
-      this.workflowId = result.workflowId;
-      if (result.plan) this._renderOutputSteps(result.plan);
-    } catch (e) {
-      this._showOutputError(e.message);
-    }
-    this._setGenerating(false);
-  }
-
-  async generateAll() {
+  generateStoryboard() {
     if (!this.selectedStyle) { showToast('👆 请先选择风格'); return; }
-    const story = document.getElementById('storyInput')?.value?.trim() || this.storyText || '';
+    const story = document.getElementById('storyInput')?.value?.trim() || '';
     if (!story) { showToast('📝 请先粘贴故事'); return; }
-
-    this._setGenerating(true);
-    this._showOutput();
-    if (this.unsubscribe) this.unsubscribe();
-    this.unsubscribe = onProgress((data) => {
-      if (data.nodeId) {
-        this.nodeStatus[data.nodeId] = data;
-        this._updateOutput(data);
-      }
-    });
-
-    try {
-      const styleName = STYLES.find(s => s.id === this.selectedStyle);
-      const result = await api.startWorkflow({
-        flowFile: 'one-click-all',
-        pastedStory: story,
-        style: styleName ? `${styleName.emoji} ${styleName.name}` : `VS${this.selectedStyle}`
-      });
-      this.workflowId = result.workflowId;
-      if (result.plan) this._renderOutputSteps(result.plan);
-    } catch (e) {
-      this._showOutputError(e.message);
-    }
-    this._setGenerating(false);
+    this._showResult('storyboard');
   }
 
-  _setGenerating(active) {
-    const btnGen = document.getElementById('btnGenerate');
-    const btnAll = document.getElementById('btnAllInOne');
-    if (btnGen) { btnGen.disabled = active; btnGen.textContent = active ? '🔄 生成中...' : '🎬 生成分镜'; }
-    if (btnAll) btnAll.disabled = active;
+  generateAll() {
+    if (!this.selectedStyle) { showToast('👆 请先选择风格'); return; }
+    const story = document.getElementById('storyInput')?.value?.trim() || '';
+    if (!story) { showToast('📝 请先粘贴故事'); return; }
+    this._showResult('allinone');
   }
 
-  _showOutput() {
+  _showResult(mode) {
     const area = document.getElementById('outputArea');
-    if (!area) return;
-    area.style.display = 'block';
-  }
-
-  _getSelectedStyleName() {
-    if (!this.selectedStyle) return '推荐';
-    const s = STYLES.find(s => s.id === this.selectedStyle);
-    return s ? s.name : '推荐';
-  }
-
-  _renderOutputSteps(plan) {
     const grid = document.getElementById('outputGrid');
-    if (!grid) return;
+    if (!area || !grid) return;
 
-    const styleName = this._getSelectedStyleName();
-    const story = document.getElementById('storyInput')?.value?.trim() || this.storyText || '';
+    const style = STYLES.find(s => s.id === this.selectedStyle);
+    const story = document.getElementById('storyInput')?.value?.trim() || '';
+    const styleName = style ? `${style.emoji} ${style.name}` : '推荐风格';
+    const refStyle = style ? `VS${style.id} ${style.name}` : 'auto';
 
+    const instruction = mode === 'allinone'
+      ? `全案板+角色卡+海报+情绪板，「${styleName}」风格，${story.slice(0, 40)}...`
+      : `「${styleName}」风格故事板，7镜，16:9，${story.slice(0, 40)}...`;
+
+    area.style.display = 'block';
     grid.innerHTML = `
-      <div class="output-summary" style="grid-column:1/-1">
-        <div class="summary-row">
-          <b>故事</b> ${story.slice(0, 50)}${story.length > 50 ? '...' : ''}
-          &nbsp;|&nbsp; <b>风格</b> ${styleName}
-          &nbsp;|&nbsp; <b>画幅</b> 16:9
+      <div class="result-card">
+        <div class="result-header">
+          <span class="result-icon">${mode === 'allinone' ? '⚡' : '🎬'}</span>
+          <span>${mode === 'allinone' ? '一键全来' : '故事板分镜'}</span>
+        </div>
+        <div class="result-body">
+          <div class="result-row"><b>风格</b> ${styleName}</div>
+          <div class="result-row"><b>画幅</b> 16:9</div>
+          <div class="result-row"><b>分镜</b> 7镜</div>
+          <div class="result-story">${story}</div>
+        </div>
+        <div class="result-action">
+          <p>复制下方指令，在 Claude Code 对话中粘贴即可生成</p>
+          <div class="result-cmd">
+            <code id="resultCode">${instruction}</code>
+            <button class="btn btn-primary btn-sm" onclick="navigator.clipboard.writeText(document.getElementById('resultCode').textContent).then(()=>showToast('✅ 已复制'))">📋 复制</button>
+          </div>
         </div>
       </div>
-      ${plan.map(phase =>
-        (phase.nodes || []).map(n => `
-          <div class="output-card" id="out-${n.id}" style="text-align:center">
-            <div class="output-status">⏳</div>
-            <div class="output-label">${n.label || n.id}</div>
-          </div>
-        `).join('')
-      ).join('')}
-      <div class="output-summary" style="grid-column:1/-1;margin-top:8px;text-align:center">
-        <p style="font-size:13px;color:var(--text);margin-bottom:6px">✅ 编排完成</p>
-        <p style="font-size:12px;color:var(--text-dim)">在 Claude Code 对话中说：</p>
-        <code style="display:inline-block;padding:8px 16px;background:var(--bg-deep);border-radius:6px;font-size:13px;margin:6px 0;color:var(--accent)">帮我生成「${styleName}」风格的故事板，${story.slice(0, 30)}...</code>
-        <br/>
-        <button class="btn btn-sm" style="margin-top:8px" onclick="navigator.clipboard.writeText('帮我生成「${styleName.replace(/'/g, "\\'")}」风格的故事板，${story.slice(0, 50).replace(/'/g, "\\'")}...').then(()=>showToast('✅ 已复制'))">📋 复制指令</button>
-      </div>
     `;
-  }
-
-  _updateOutput(data) {
-    const card = document.getElementById(`out-${data.nodeId}`);
-    if (!card) return;
-    const statusEl = card.querySelector('.output-status');
-    if (statusEl) {
-      const icons = { running: '🔄', completed: '✅', failed: '❌' };
-      statusEl.textContent = icons[data.status] || '⏳';
-    }
-    card.className = `output-card status-${data.status}`;
-  }
-
-  _showOutputError(msg) {
-    const grid = document.getElementById('outputGrid');
-    if (grid) grid.innerHTML += `<div class="workflow-error">❌ ${msg}</div>`;
   }
 
   // ---- Save ----
