@@ -414,13 +414,6 @@ class MarketView {
           <div class="result-row"><b>分镜</b> 7镜</div>
           <div class="result-story">${story}</div>
         </div>
-        <div class="result-action">
-          <p>复制下方指令，在 Claude Code 对话中粘贴即可生成</p>
-          <div class="result-cmd">
-            <code id="resultCode">${instruction}</code>
-            <button class="btn btn-primary btn-sm" onclick="navigator.clipboard.writeText(document.getElementById('resultCode').textContent).then(()=>showToast('✅ 已复制'))">📋 复制</button>
-          </div>
-        </div>
       </div>
     `;
   }
