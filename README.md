@@ -17,7 +17,7 @@
 - 🎥 **视频 Prompt** — 一条完整 Prompt 直喂 Seedance / Runway / 可灵
 - 🎨 **50+ 视觉风格** — 东方玄幻 / 王家卫 / 赛博 / 水墨 / 3D动画…
 - 📐 **10 种输出格式** — 全案板 / 角色卡 / 场景卡 / 海报 / 漫画分镜 / 情绪板…
-- 📱 **多平台适配** — GPT Image / Midjourney v6/v7 / SDXL / SD3 / DALL-E 3
+- 📱 **多平台 Prompt 输出** — GPT Image / Midjourney 主推，同时兼容 SD / DALL-E 等平台
 
 ---
 
@@ -107,6 +107,27 @@ ai-visual-director/
 ├── CHANGELOG.md             ← 版本记录
 └── release-checklist.md     ← 发布验收清单
 ```
+
+---
+
+## 多平台 Prompt 输出
+
+AI Visual Director 主要面向 **GPT Image** 与 **Midjourney** 使用场景，同时提供 Stable Diffusion / SDXL / SD3 / DALL-E 3 等平台的 Prompt 输出模板。
+
+**说明**：
+- GPT Image / Midjourney 是当前主要适配方向。
+- SDXL / SD3 / DALL-E 3 提供 Prompt 结构兼容，不保证所有参数在不同环境下完全一致。
+- ComfyUI / ControlNet / IP-Adapter 等本地工作流属于扩展用法，欢迎社区自行适配。
+- 如果你在某个平台遇到 Prompt 不兼容、参数无效、效果偏差等问题，欢迎 [提交 Issue](https://github.com/jijiutong/ai-visual-director/issues)。
+
+| 平台 | 状态 | 说明 |
+|------|------|------|
+| GPT Image | ✅ 主推 | 适合长自然语言 Prompt、角色卡、场景卡、分镜全案 |
+| Midjourney | ✅ 主推 | 适合视觉风格图、海报、关键帧、场景概念图 |
+| Stable Diffusion / SDXL | 📝 模板兼容 | 输出正向/负向 Prompt，本地参数需用户自行调整 |
+| SD3 / SD3.5 | 📝 模板兼容 | 提供基础 Prompt 结构，不保证不同环境完全一致 |
+| DALL-E 3 | 📝 模板兼容 | 兼容自然语言图像 Prompt |
+| ComfyUI / ControlNet / IP-Adapter | 🔧 社区扩展 | 不默认内置本地部署，欢迎 PR / Issue |
 
 ---
 

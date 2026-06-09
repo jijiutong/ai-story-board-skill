@@ -24,7 +24,7 @@
 - **Scene consistency**: all-in-one reference / 720° panorama / overhead shot / orbit capture / text scene lock
 - **53 visual styles**: Eastern Fantasy, Urban Mood, Ink Wash, Wong Kar-wai, Ghibli, Black-Gold Action…
 - **Video workflow**: storyboard → Seedance / Runway / Kling / Luma / Pika video prompt
-- **Multi-platform**: GPT Image / Midjourney / SDXL / Flux / Tongyi Wanxiang prompt format auto-adaptation
+- **Multi-platform prompts**: GPT Image / Midjourney as primary; SD / DALL-E compatible
 
 Full capability matrix → [docs/capability-matrix.md](docs/capability-matrix.md)
 
@@ -152,14 +152,33 @@ Supports Seedance / Runway / Kling / Luma / Pika.
 
 ## Supported Platforms
 
-| Image | Video |
-|-------|-------|
-| GPT Image / DALL·E 3 | Seedance |
-| Midjourney v6/v7 | Runway Gen-4 |
-| Stable Diffusion XL/3 | Kling |
-| Flux / Ideogram | Luma Dream Machine |
-| Tongyi Wanxiang | Pika |
-| ComfyUI / Recraft |  |
+> AI Visual Director is a **prompt workflow skill**, not a local image generation framework.
+> GPT Image and Midjourney are the primary targets. Other platforms receive template-level compatibility.
+
+| Platform | Status | Notes |
+|----------|--------|-------|
+| GPT Image | ✅ Primary | Best for long natural-language prompts, character sheets, scene cards, full storyboards |
+| Midjourney | ✅ Primary | Best for visual style art, posters, keyframes, scene concepts |
+| Stable Diffusion / SDXL | 📝 Template-compatible | Positive/negative prompts provided; local parameters need user adjustment |
+| SD3 / SD3.5 | 📝 Template-compatible | Basic prompt structure provided; not guaranteed identical across environments |
+| DALL-E 3 | 📝 Template-compatible | Compatible with natural-language image prompts |
+| ComfyUI / ControlNet / IP-Adapter | 🔧 Community extension | No built-in local deployment; PRs & Issues welcome |
+
+If you encounter prompt incompatibility, invalid parameters, or output deviation on any platform, please [open an Issue](https://github.com/jijiutong/ai-visual-director/issues).
+
+---
+
+## Video Platforms
+
+| Platform | Notes |
+|----------|-------|
+| Seedance | Multi-image input, native Chinese, audio output |
+| Runway Gen-4 | Most mature SDK, image-to-video / text-to-video |
+| Kling | 4K output, character ID reuse |
+| Luma Dream Machine | First/last frame interpolation, smooth transitions |
+| Pika | Social short video, quick iteration |
+
+> Video API calls require your own platform API keys. Without keys configured, the Skill still generates all prompts normally.
 
 ---
 
@@ -197,9 +216,9 @@ The system recognizes input in this order:
 | Feature | GPT Image | Midjourney | Stable Diffusion |
 |---------|-----------|------------|------------------|
 | Chinese input | ✅ Native | ⚠️ Needs translation | ❌ Not supported |
-| Layout | ⭐⭐ Strong | ⭐ Single image focused | ⭐ Needs ControlNet |
-| Character consistency | ⭐⭐ Medium | ⭐⭐⭐ --cref | ⭐⭐⭐ IP-Adapter |
-| Best for | Full board / manga / mood board | Poster / character / scene | Character sheets / local batch |
+| Layout | ⭐⭐ Strong | ⭐ Single image focused | ⭐ Needs ControlNet (community) |
+| Character consistency | ⭐⭐ Medium | ⭐⭐⭐ --cref | ⭐⭐⭐ IP-Adapter (community) |
+| Best for | Full board / manga / mood board | Poster / character / scene | Local batch (community extension) |
 
 ---
 
