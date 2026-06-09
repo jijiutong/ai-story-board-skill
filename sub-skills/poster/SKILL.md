@@ -12,6 +12,18 @@ description: Movie poster generation — cinematic posters in any style, portrai
 - `/poster [片名/故事]`
 - 直接说 "海报"、"电影海报"、"封面"、"出张海报"
 
+## 常用参数
+
+| 指令 | 效果 |
+|------|------|
+| `/poster 电影海报` | 标准影院海报（默认竖版 2:3） |
+| `/poster 小红书封面` | 9:16 竖版封面，适合小红书 |
+| `/poster 抖音头图` | 抖音 profile 头图比例 |
+| `/poster B站封面` | B站视频封面 16:9 |
+| `/poster 竖版海报` | 2:3 竖版电影海报 |
+| `/poster 横版海报` | 16:9 宣传横幅 |
+| `/poster 多版本` | 同主题 A/B/C 三版本对比 |
+
 ## 工作流
 
 ### Step 1: 提取海报要素

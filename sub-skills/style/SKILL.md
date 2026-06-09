@@ -14,6 +14,14 @@ description: Style explorer — browse 53 visual styles, fuse any two styles, or
 - 风格融合：`/style [风格A] + [风格B]`
 - 风格迁移：`/style 换成 [风格X] 但保持角色`
 
+## 子指令
+
+| 指令 | 效果 |
+|------|------|
+| `/style 看全部` | 展示 53 种风格 + 10 种格式 + 常用融合方案 |
+| `/style [A] + [B]` | 风格融合：60% 主风格 + 40% 副风格 |
+| `/style 换成 [X] 但保持角色` | 风格迁移：保持角色 DNA，只改变画面风格 |
+
 ## 全部 53 种风格
 
 ### 类型片风格（1-20）

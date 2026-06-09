@@ -12,6 +12,20 @@ description: AI video full workflow — 5-step recommended pipeline from storybo
 - `/video [故事/故事板]`
 - 直接说 "转视频"、"出视频"、"视频工作流"、"Seedance"
 
+## 子指令
+
+| 指令 | 效果 |
+|------|------|
+| `/video 转视频` | 故事板→推荐流程→视频方案 |
+| `/video 出视频 prompt` | 压缩模式 ≤1500 字，适合 Seedance |
+| `/video 详细模式` / `展开 prompt` | 3000+ 字详细 Prompt，适合 Runway/可灵/Luma |
+| `/video 切分各帧` / `逐帧接力` | 前一帧作后一帧参考图，链式传递 |
+| `/video 生成视频分镜图` / `合并帧` | 3-4 个关键帧合成一张分镜图 |
+| `/video 继续下一段` / `续写下一段` | AI 自动续写下一段剧情+匹配衔接技法 |
+| `/video 用 [技法名] 衔接，继续下一段` | 手动指定衔接技法（如 J-Cut/图形匹配剪） |
+| `/video 下一段往 [方向] 发展` | 手动指定剧情发展方向 |
+| `/video 检查视频` / `视频检查` | 10 项生成后检查清单 |
+
 ## 5 步推荐流程
 
 ```

@@ -12,6 +12,16 @@ description: Scene concept art — 7 scene consistency methods to lock environme
 - `/scene [场景描述]`
 - 直接说 "场景"、"场景设计"、"场景概念图"、"环境设计"
 
+## 子指令
+
+| 指令 | 效果 |
+|------|------|
+| `/scene 场景锚点` | 自动推荐最适合的锁场景方法 |
+| `/scene 全能参考图` / `all-in-one` | 一张图锁定场景+角色+光照+道具+氛围+构图 |
+| `/scene 720全景` | 360°×180° 全景环境图 |
+| `/scene 环绕截图` / `视频截图法` | 环绕视频→截取 8 角度→场景参考板 |
+| `/scene camera remix` | 同场景多角度镜头变化，保持空间一致 |
+
 ## 工作流
 
 ### Step 1: 收集场景信息
