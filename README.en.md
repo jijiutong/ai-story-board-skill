@@ -53,9 +53,10 @@ AI: [Full prompt]
 
 | Command | Effect |
 |---------|--------|
-| `一键生成` (one-click generate) | Full pipeline auto, no options shown |
-| `一键全平台` (one-click all platforms) | Full pipeline + GPT/MJ/SD outputs |
-| `一键多版本` (one-click multi-version) | Full pipeline + A/B/C comparison |
+| `/storyboard 一键生成` | Full pipeline auto, no options shown |
+| `/storyboard 一键全平台` | Full pipeline + GPT/MJ/SD outputs |
+| `/storyboard 多版本` | Full pipeline + A/B/C comparison |
+| `/storyboard 看全部` | Show all 53 styles + 10 formats |
 
 ---
 
@@ -147,7 +148,7 @@ AI: [Version A: Eastern Fantasy] [prompt A]
 ### Example 6: One-Click All Platforms
 
 ```
-You: 一键全平台 (all platforms)
+You: /storyboard 一键全平台
 AI: [GPT Image 2 version] [Full Chinese description]
     [Midjourney v6 version] [English + --cref + --v 6]
     [Stable Diffusion XL version] [Positive/Negative/Params]
@@ -350,11 +351,14 @@ ai-visual-director/
 
 | Command | Effect |
 |---------|--------|
-| `一键生成` | Full pipeline auto, no options shown |
-| `一键全平台` | Full pipeline + GPT/MJ/SD |
-| `一键多版本` | A/B/C three version comparison |
-| `看全部` | Show all 53 styles + 10 formats |
+### Core Commands (use under `/storyboard`)
 
+| Command | Effect |
+|------|------|
+| `/storyboard 一键生成` | Full pipeline auto, no options |
+| `/storyboard 一键全平台` | Full pipeline + GPT/MJ/SD |
+| `/storyboard 多版本` | A/B/C comparison |
+| `/storyboard 看全部` | Show all 53 styles + 10 formats |
 ### Scene Consistency
 
 | Command | Effect |
