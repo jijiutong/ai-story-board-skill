@@ -1,4 +1,4 @@
-# AI Visual Director
+# AI Visual Director - 先不要使用-我还得优化
 
 <p align="center">
   <a href="./README.md"><b>中文</b></a> · <a href="./README.en.md">English</a>
