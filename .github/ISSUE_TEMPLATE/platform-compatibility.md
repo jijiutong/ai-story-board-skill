@@ -7,22 +7,39 @@ labels: platform-compatibility
 
 ## Platform
 
+**Image**:
 - [ ] GPT Image
 - [ ] Midjourney
 - [ ] Stable Diffusion / SDXL
 - [ ] SD3 / SD3.5
 - [ ] DALL-E 3
 - [ ] ComfyUI
-- [ ] Other:
+
+**Video**:
+- [ ] Seedance
+- [ ] Runway
+- [ ] Kling / 可灵
+- [ ] Luma Dream Machine
+- [ ] Pika
+
+**Export**:
+- [ ] Storyboard Pro
+- [ ] FrameForge
+- [ ] Celtx
+
+**Other**: [ ]
 
 ## Prompt Type
 
-- [ ] Storyboard
-- [ ] Character card
-- [ ] Scene concept
-- [ ] Poster
-- [ ] Video prompt
-- [ ] Style transfer
+- [ ] Storyboard / 全案板
+- [ ] Character card / 角色卡
+- [ ] Scene concept / 场景卡
+- [ ] Poster / 海报
+- [ ] Video prompt (compressed)
+- [ ] Video prompt (detailed)
+- [ ] Style transfer / 风格迁移
+- [ ] Multi-version / 多版本
+- [ ] Industry export / 行业导出
 
 ## Problem
 
