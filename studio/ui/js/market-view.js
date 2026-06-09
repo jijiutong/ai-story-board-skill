@@ -374,15 +374,15 @@ class MarketView {
 
   // ---- Generate ----
   async generateStoryboard() {
-    if (!this.selectedStyle) return;
-    const story = document.getElementById('storyInput')?.value?.trim() || '';
-    if (!story) { alert('请先粘贴故事'); return; }
+    if (!this.selectedStyle) { showToast('👆 请先在推荐区或画廊中选择一个风格'); return; }
+    const story = document.getElementById('storyInput')?.value?.trim() || this.storyText || '';
+    if (!story) { showToast('📝 请先粘贴故事'); return; }
 
     this._setGenerating(true);
     this._showOutput();
 
     if (this.unsubscribe) this.unsubscribe();
-    this.unsubscribe = window.onProgress((data) => {
+    this.unsubscribe = onProgress((data) => {
       if (data.nodeId) {
         this.nodeStatus[data.nodeId] = data;
         this._updateOutput(data);
@@ -406,14 +406,14 @@ class MarketView {
   }
 
   async generateAll() {
-    if (!this.selectedStyle) return;
-    const story = document.getElementById('storyInput')?.value?.trim() || '';
-    if (!story) { alert('请先粘贴故事'); return; }
+    if (!this.selectedStyle) { showToast('👆 请先选择风格'); return; }
+    const story = document.getElementById('storyInput')?.value?.trim() || this.storyText || '';
+    if (!story) { showToast('📝 请先粘贴故事'); return; }
 
     this._setGenerating(true);
     this._showOutput();
     if (this.unsubscribe) this.unsubscribe();
-    this.unsubscribe = window.onProgress((data) => {
+    this.unsubscribe = onProgress((data) => {
       if (data.nodeId) {
         this.nodeStatus[data.nodeId] = data;
         this._updateOutput(data);
