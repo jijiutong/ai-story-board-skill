@@ -55,3 +55,54 @@
 【风格迁移】从 [源风格] → [目标风格]。角色DNA保持不变。
 变更：配色 [原]→[新]，氛围 [原]→[新]，特效 [原]→[新]，灯光 [原]→[新]。
 ```
+
+---
+
+## 风格迁移后 shot-state 联动更新
+
+迁移完成后，**必须**逐镜更新 `state/shot-state.md` 的色彩和灯光字段：
+
+```
+风格迁移完成（variable-registry style.* 已更新）
+  ↓
+1. 读取 knowledge/visual-styles.md → 新风格的配色/灯光方案
+2. 遍历 state/shot-state.md 所有镜头：
+   ├─ color 字段：替换为新风格的配色方案
+   ├─ lighting 字段：替换为新风格的灯光方案
+   └─ 保留：shot_size / camera / focal_length / action / transition（构图层不变）
+3. 标记变更：
+   └─ 每镜追加迁移标注：「[原配色/灯光] → [新配色/灯光]」
+4. 输出迁移影响报告
+```
+
+### 迁移影响报告格式
+
+```
+【风格迁移报告】东方玄幻 → 王家卫情绪
+
+🔒 锁定不变（7 镜全部保持）：
+  ✅ 角色DNA：墨渊/顾长空 全部字段
+  ✅ 镜号/景别/运镜/焦段/转场：14 字段全保留
+  ✅ 叙事结构/情绪曲线：保留阶段，仅色彩映射变更
+
+🎨 已变更（每镜）：
+  色彩：暗绿#1a2a1a + 烛火暖黄 → 霓虹蓝绿 + 琥珀色
+  灯光：顶光+闪电冷白 → 霓虹侧光+湿润光晕
+  特效：灵气粒子 → 慢门光轨+雨丝
+
+📋 受影响镜头：SH1-SH7（全 7 镜色彩/灯光字段已更新）
+
+🔄 建议重跑 consistency-engine Style RM + Scene RM 验证迁移一致性
+```
+
+---
+
+## 联动
+
+← 用户指令（"换成X风格但保持角色"）
+← 读取 `state/variable-registry.md`（当前 style.*）
+← 读取 `knowledge/visual-styles.md`（新风格参数）
+→ 更新 `state/variable-registry.md`（style.visual_style / color_narrative）
+→ **更新 `state/shot-state.md`**（每镜 color + lighting 字段）
+→ 输出迁移影响报告
+→ 建议触发 consistency-engine 重评（Style RM + Scene RM）

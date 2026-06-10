@@ -112,6 +112,54 @@
 
 ---
 
+## 运行时契约校验（由 consistency-engine Video RM 调用）
+
+每次模板生成 prompt 后，执行以下校验：
+
+```
+【Contract Check】
+
+1. Reads 覆盖：
+   ├─ 扫描模板 reads 声明的所有变量路径
+   ├─ 验证每个路径在 state/ 中存在且已赋值（非 "—"）
+   └─ 未赋值 → ⚠ "变量 <路径> 被模板 <名称> 读取但 state/ 中值为空"
+
+2. 读取前置：
+   ├─ 模板 reads 的变量，写入方引擎是否已执行？
+   ├─ 例：video-prompt-assembly reads shot-state，但 video-director（写入方）已执行 ✅
+   └─ 未执行 → ❌ "模板 <名称> 读取了尚未写入的变量 <路径>"
+
+3. 写入阶段：
+   ├─ 模板声明为 writes 的资产，asset-map 中是否已注册？
+   ├─ 例：character-sheet writes asset_map.character_sheet
+   └─ 未注册 → ⚠ "模板 <名称> 产出但未在 asset-map 中注册"
+
+4. 模板间依赖：
+   ├─ full-board reads shot-state → shot-state 是否由前序引擎写入？
+   └─ contract 链：character-sheet → asset-map → video-prompt-assembly 读取 ✅/❌
+```
+
+### 校验输出格式
+
+```
+【Contract Check】3/4 通过
+
+✅ Reads 覆盖：8/8 变量在 state/ 中存在且已赋值
+❌ 读取前置：quick-board reads shot-state，但 shot-state 尚未写入（video-director 未执行）
+✅ 写入阶段：3/3 产出资产已注册 asset-map
+✅ 模板依赖：依赖链完整
+
+阻断：第2项 — 模板 quick-board 不能在此阶段调用，需等待 video-director 完成。
+```
+
+### 校验时机
+
+- **主链运行时**：每个模板生成 prompt 前自动校验
+- **单点资产模式**：生成角色卡/场景图前校验依赖是否满足
+- **恢复项目时**：加载 state/ 后校验所有变量是否完整
+
+---
+
 ## 联动
 
 - **校验工具**：`final-video-qc` 可对照此契约检查变量覆盖率

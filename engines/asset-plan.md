@@ -156,6 +156,43 @@
 
 ---
 
+## 资产变更传播
+
+当角色卡或场景图重新生成（immutable_features / fixed_elements 变更）时，**必须**向下游传播：
+
+```
+资产变更（variable-registry 中的 immutable_features 或 fixed_elements 更新）
+  ↓
+1. 扫描 state/shot-state.md 所有镜头
+2. 标记引用了该角色/场景的镜头：
+   └─ shot-state.characters 包含角色ID → 标记
+   └─ shot-state.scene_id 匹配 → 标记
+3. 更新各镜 action/lighting/color 描述：
+   ├─ 角色变更 → 更新 action 中的外观描述
+   ├─ 场景变更 → 更新 lighting/color 中的空间约束
+   └─ 同步更新 video-prompt-assembly 已生成的 prompt 文本
+4. 重新触发 consistency-engine（检查变更是否引入不一致）
+5. 输出变更影响报告
+```
+
+### 示例
+
+```
+重新生成角色卡 "墨渊" → immutable_features 更新：
+  旧：黑衣/长发/暗金护腕
+  新：黑衣/长发/暗金护腕/左脸疤痕/「断念」剑身裂纹
+
+传播：
+  → SH1 action 追加 "left cheek scar visible"
+  → SH3 action "剑身细密裂纹泛青光"
+  → SH5 action "疤痕在闪电下格外醒目"
+  → SH7 尾帧 "裂纹沿剑身蔓延至剑尖"
+
+受影响: 4镜（SH1/3/5/7）| 检查: consistency-engine Character RM
+```
+
+---
+
 ## 联动
 
 ← 接收 `video-director` 的参考图决策 + `story-intake` 的视频类型
@@ -163,3 +200,4 @@
 → 不满足最低资产 → `auto-repair` 触发修复
 → 满足 → 放行到 `reference-anchor`
 → **写入 `state/variable-registry.md`**（style.layout_*, characters.*.immutable_features, scene.primary.fixed_elements）
+→ **资产变更时触发传播**：扫描 shot-state → 更新关联镜头 → 重跑 consistency-engine

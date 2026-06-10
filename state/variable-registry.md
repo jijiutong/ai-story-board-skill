@@ -42,11 +42,18 @@
 |------|-----|--------|
 | `characters.protagonist.name` | — | `story-intake`（缺则自动起名） |
 | `characters.protagonist.dna_id` | — | `video-director`（C1/C2...） |
-| `characters.protagonist.immutable_features` | — | `asset-plan`（3-5个不可变特征列表） |
+| `characters.protagonist.immutable_features` | — | `asset-plan`（硬锁特征，必含：脸型/眼型瞳色/鼻型/发型发色/肤色/身高体型，+ 角色特有标志） |
+| `characters.protagonist.dna_full` | — | `asset-plan`（DNA 20 字段完整值：1姓名 2性别年龄 3身高体型 4脸型 5眼型瞳色 6眉型 7鼻型 8嘴型唇色 9发型发色 10肤色 11服装 12配饰 13武器道具 14声音 15体态站姿 16习惯动作 17气味 18情绪底色 19可变字段 20不变量标注） |
 | `characters.antagonist.name` | — | `story-intake` |
 | `characters.antagonist.dna_id` | — | `video-director` |
 | `characters.antagonist.immutable_features` | — | `asset-plan` |
+| `characters.antagonist.dna_full` | — | `asset-plan` |
 | `characters.supporting` | — | `story-intake`（[{name, role}] 列表） |
+
+> **DNA 锁定分层**：
+> - **硬锁（immutable_features）**：跨镜绝对不变 — 脸型/眼型瞳色/鼻型/发型发色/肤色/身高体型/标志性特征（疤痕/纹身/胎记）
+> - **软锁（dna_full 中其余字段）**：允许有说明的变化 — 服装/配饰/武器（可换装但形制不变）/情绪（按曲线演进）
+> - **禁止变更（20.不变量标注）**：用户手动指定的不可变字段，优先级最高
 
 ## 场景变量
 
