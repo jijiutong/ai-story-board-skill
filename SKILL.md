@@ -1,6 +1,6 @@
 ---
 name: ai-visual-director
-description: One-click AI visual director system. Turn any story into a complete video generation package. Unified state registry (variable-registry + asset-map + shot-state + dialogue-map), standardized routing (/create /source /storyboard /character /scene /video), 8-item QC with reference consistency check. Legacy compatible: /style, /poster.
+description: One-click AI visual director system — Story Production OS. Turn any story into a complete video generation package. Unified state registry (variable-registry + asset-map + shot-state + dialogue-map), project persistence (project-manager init/save/load), 5-dimension consistency engine (Character/Scene/Style/Story/Video RM), knowledge retrieval engine, standardized routing (/create /source /storyboard /character /scene /video), 8-item QC with reference consistency check. Legacy compatible: /style, /poster.
 ---
 
 # AI Visual Director Skill

@@ -1,20 +1,24 @@
 # 自动修复引擎
 
-评分低于阈值后的自动补救策略链。
+评分低于阈值后的自动补救策略链。修复策略不再硬编码，而是通过 `knowledge-retrieval` 从 `knowledge/` 动态检索最佳实践。
 
 ---
 
-## 触发条件
+## 知识库驱动修复
 
-| 问题 | 阈值 | 修复策略 |
-|------|------|---------|
-| 角色一致性 < 70 | 角色DNA不清晰 | 补角色卡 + 面部多角度 + DNA字段强化 |
-| 场景一致性 < 70 | 场景漂移风险高 | 补场景全景锚点 + 光照方向声明 |
-| 动作清晰度 < 60 | 动作描述模糊 | 补首尾帧 + 动作关键帧 + 运动方向 |
-| Prompt 得分 < 70 | 整体质量不足 | 检查弱项→针对性修复 |
-| 平台兼容 < 60 | 超长/格式错误 | 压缩到平台限制（联动prompt-compression） |
-| 连续性 < 60 | 时空断裂 | 补过渡帧 + 状态继承描述 |
-| 字数超限 | 超过平台字数上限 | 一键压缩（联动prompt-compression） |
+每个策略对应一组知识检索查询：
+
+| 问题 | 阈值 | 知识检索 | 修复策略 |
+|------|------|---------|---------|
+| 角色一致性 < 70 | 角色DNA不清晰 | `character-dna.md` + `costume-design.md` + `micro-expressions.md` | 补角色卡 + 面部多角度 + DNA字段强化 |
+| 场景一致性 < 70 | 场景漂移风险高 | `environments.md` + `lighting.md` + `color-narratives.md` | 补场景全景锚点 + 光照方向声明 |
+| 动作清晰度 < 60 | 动作描述模糊 | `camera.md` + `body-language.md` | 补首尾帧 + 动作关键帧 + 运动方向 |
+| Prompt 得分 < 70 | 整体质量不足 | `visual-styles.md` + `pacing-types.md` + `emotion-curves.md` | 检查弱项→针对性修复 |
+| 平台兼容 < 60 | 超长/格式错误 | —（直接执行压缩） | 压缩到平台限制（联动prompt-compression） |
+| 连续性 < 60 | 时空断裂 | `transitions.md` + `continuity-state.md` + `editing-theory.md` | 补过渡帧 + 状态继承描述 |
+| 一致性引擎阻断 | 某RM < 50 | `knowledge-retrieval.md` → 匹配具体 RM 维度 | 按 RM 维度专项修复 |
+
+> 💡 修复前调用 `engines/knowledge-retrieval.md` 检索具体操作参数，替代硬编码的"补锚点/补过渡"，确保修复与风格定义和文化背景一致。
 
 ---
 
@@ -121,8 +125,10 @@
 ## 联动
 
 ← 接收 `engines/prompt-scorer.md` 的评分结果
+← 接收 `engines/consistency-engine.md` 的一致性评估报告（RM 阻断项触发专项修复）
 ← 接收 `engines/asset-plan.md` 的最低资产校验结果（不满足时触发策略2/3补资产）
 ← 接收 `engines/reference-anchor.md` 的平台校验结果（不通过时触发策略4压缩或策略5连续性修复）
+← 调用 `engines/knowledge-retrieval.md`（修复前检索 knowledge/ 获取具体操作参数）
 → 按策略链修复
 → 重新评分→仍不达标→再次修复（最多3轮）
 → 3轮后仍不达标→标记为"需人工介入"

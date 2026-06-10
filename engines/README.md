@@ -9,23 +9,25 @@
 按顺序执行，从前到后自动流转。每个引擎产出写入 `state/` 注册中心，下游引擎和模板从 `state/` 统一读取。
 
 ```
-task-router → sources/ → story-intake → shot-budget → video-director
+task-router → project-manager → sources/ → story-intake → shot-budget → video-director
 → asset-plan → reference-anchor → motion-physics → video-prompt-assembly
-→ prompt-scorer → auto-repair → rules/final-video-qc → render-package
-                              ↑ 写入 state/                    ↑ 读取 state/
+→ consistency-engine → prompt-scorer → auto-repair → rules/final-video-qc → render-package
+       ↑ 项目初始化/加载               ↑ 写入 state/              ↑ 读取 state/
 ```
 
 | 文件 | 职责 | 输入 ← | 输出 → |
 |------|------|--------|--------|
 | `task-router.md` | 意图识别+路由分发（总入口） | 用户输入 | 第一个目标引擎 |
+| `project-manager.md` | 项目管理：init/save/load/delete + state/ 持久化 | task-router | sources/ |
 | `story-intake.md` | 故事摄入：提取字段+角色+场景+冲突 | sources/ | shot-budget |
 | `shot-budget.md` | 镜头预算：定时长/镜数/拆段/压缩 | story-intake | video-director |
 | `video-director.md` | 导演决策：节奏/高潮/情绪曲线/参考图 | shot-budget | asset-plan |
 | `asset-plan.md` | 资产规划：角色卡/场景图/最低校验 | video-director + story-intake | reference-anchor |
 | `reference-anchor.md` | 平台锚点：参考图策略+平台限制校验 → 写入 state/asset-map | asset-plan | motion-physics + state/asset-map |
 | `motion-physics.md` | 运动物理：运动预算+兼容性检查 | reference-anchor | video-prompt-assembly |
-| `video-prompt-assembly.md` | Prompt组装：4层结构+平台适配 ← 读 state/asset-map, shot-state, dialogue-map | motion-physics + state/ | prompt-scorer |
-| `prompt-scorer.md` | 自动评分：6维度评分+阈值判断 | video-prompt-assembly | auto-repair 或 final-video-qc |
+| `video-prompt-assembly.md` | Prompt组装：4层结构+平台适配 ← 读 state/asset-map, shot-state, dialogue-map | motion-physics + state/ | consistency-engine |
+| `consistency-engine.md` | 一致性评估：5维度（Character/Scene/Style/Story/Video）评分 | video-prompt-assembly + state/ | prompt-scorer |
+| `prompt-scorer.md` | 自动评分：6维度评分+阈值判断 | consistency-engine | auto-repair 或 final-video-qc |
 | `auto-repair.md` | 自动修复：低于阈值→按策略修复（最多3轮） | prompt-scorer | rules/final-video-qc |
 | `render-package.md` | 打包输出：资产+Prompt+平台参数+执行清单 | rules/final-video-qc | 用户 |
 

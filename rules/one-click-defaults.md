@@ -50,20 +50,28 @@
 ```
 用户输入 → task-router（短句检测）
   ↓
+project-manager（auto-init：创建项目 ID + state/ 目录）
+  ↓
 paste-input（自动补全角色/场景/冲突）
   ↓
 story-intake → shot-budget → video-director → asset-plan
   │               ↑ 写入 state/variable-registry
   ↓
-reference-anchor → motion-physics → video-prompt-assembly → prompt-scorer
+reference-anchor → motion-physics → video-prompt-assembly
   │                 ↑ 写入 asset-map  ↑ 补充 shot-state    ↑ 读取 state/
   ↓
-（评分≥85跳过修复，<85触发auto-repair → 重评）
+consistency-engine（5 维度 RM 评估 + 知识库建议）
+  ↓
+prompt-scorer（6 维度评分，接收一致性报告）
+  ↓
+（评分≥85跳过修复，<85触发auto-repair → 调用 knowledge-retrieval → 重评）
   ↓
 final-video-qc → render-package
   ↑ 读取 state/
   ↓
-输出：角色卡 + 场景图 + 分镜图 + 视频 Prompt + 执行清单
+project-manager（auto-save：持久化 state/ 到 projects/ 目录）
+  ↓
+输出：角色卡 + 场景图 + 分镜图 + 视频 Prompt + 一致性报告 + 执行清单
 ```
 
 不展示任何选项，直接输出最终结果。确认最多 1 次（仅在故事有歧义时）。

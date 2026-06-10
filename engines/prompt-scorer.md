@@ -96,5 +96,6 @@
 ## 联动
 
 ← 接收 `video-prompt-assembly` 组装完成的 prompt + 所有前序引擎的输出
+← 接收 `consistency-engine` 的一致性评估报告（5 维度评分作为补充参考）
 → 评分低 → 触发 `auto-repair`
 → 修复后重评（最多 3 轮）

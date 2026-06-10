@@ -59,11 +59,15 @@ motion-physics → 补充 shot-state（运动数据）
 video-prompt-assembly ← 读取 variable-registry + asset-map + shot-state + dialogue-map
                       → 组装视频 prompt
   ↓
-final-video-qc ← 读取 asset-map + shot-state + dialogue-map
-               → 校验引用一致性
+consistency-engine ← 读取全部 state/（5 维度 RM 评估 + 知识库建议）
   ↓
-render-package → 输出
+prompt-scorer → auto-repair → ... → final-video-qc → render-package
+                   ↑ 调用 knowledge-retrieval 动态检索修复策略
+  ↓
+project-manager → 持久化 state/ → projects/<id>/state/
 ```
+
+> 虚线之后为 V2 新增：consistency-engine（一致性评估）、knowledge-retrieval（知识库检索）、project-manager（项目持久化）。
 
 ---
 
@@ -71,6 +75,7 @@ render-package → 输出
 
 ```
 sources/ → 提取初始状态 → 写入 variable-registry
+project-manager → 初始化项目 ID + state/ 目录 → 写入 variable-registry
 engines/story-intake → 写入 variable-registry（基础字段）
 engines/shot-budget → 写入 variable-registry（时长）
 engines/video-director → 写入 variable-registry + shot-state + dialogue-map

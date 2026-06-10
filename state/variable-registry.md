@@ -3,6 +3,7 @@
 记录一次生成任务的所有全局变量。各引擎按主链阶段**逐步写入**，模板和下游引擎**统一读取**。
 
 > 这是整个 state/ 层的根节点。其他 state 文件（asset-map、shot-state、dialogue-map）引用此处的变量 ID。
+> 通过 `engines/project-manager.md` 实现跨会话持久化：会话结束时保存到 `projects/<id>/state/`，下次加载时恢复。
 
 ---
 
@@ -10,6 +11,10 @@
 
 | 变量 | 值 | 写入方 |
 |------|-----|--------|
+| `project.id` | — | `project-manager`（格式：PROJ-YYYYMMDD-XXXX） |
+| `project.state_dir` | — | `project-manager`（如：projects/PROJ-20260610-A3F2/） |
+| `project.created_at` | — | `project-manager`（初始化时间戳） |
+| `project.saved_at` | — | `project-manager`（最后保存时间戳） |
 | `project.title` | — | `story-intake` |
 | `project.genre` | — | `story-intake` |
 | `project.duration` | — | `shot-budget` |
