@@ -35,6 +35,7 @@ task-router（意图识别+路由分发）
   -> engines/shot-budget.md           → 写入 state/variable-registry
   -> engines/video-director.md        → 写入 state/variable-registry + shot-state + dialogue-map
   -> engines/asset-plan.md            → 写入 state/variable-registry
+  -> engines/consistency-trigger.md    → 分镜密度+场景/角色一致性方法决策（建议，不阻塞）
   -> engines/reference-anchor.md      → 写入 state/asset-map
   -> engines/motion-physics.md        → 补充 state/shot-state
   -> engines/project-graph.md         → 构建 state/project-graph（依赖图：正向索引+反向索引）
