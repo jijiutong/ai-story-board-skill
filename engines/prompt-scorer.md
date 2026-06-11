@@ -68,8 +68,8 @@
 
 | 总分 | 操作 |
 |------|------|
-| ≥ 85 | 放行 |
-| 70-84 | 标记问题，放行 |
+| ≥ SCORE_PASS_THRESHOLD（从 api-config.template.env 读取）| 放行 |
+| 70-(SCORE_PASS_THRESHOLD-1) | 标记问题，放行 |
 | 60-69 | 触发 auto-repair |
 | < 60 | 强制 auto-repair |
 | 任一项 < 50 | 该单项强制修复 |
