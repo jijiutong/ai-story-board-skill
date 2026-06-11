@@ -53,7 +53,9 @@
 ...
 ```
 
-**Prompt 总字数控制在 1500 字以内**，最大可能遵从故事板，少写冗余文字。
+> **帧描述 ≤15字约束**：保留核心视觉信息（角色动作+环境），删修辞/氛围/重复。此限制确保总 Prompt 不超平台上限。若帧阶段复杂可放宽至 ≤25字，但总字数不得超出。
+>
+> **Prompt 总字数上限**：从 api-config.template.env 读取目标平台的 `{PLATFORM}_MAX_PROMPT_CHARS`。默认 Seedance=1500字。超出则触发 prompt-compression。
 
 ### 第 3 层：约束层（@图从 asset-map 动态读取）
 ```

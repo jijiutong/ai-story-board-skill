@@ -219,6 +219,38 @@
 - **Prompt 句式**：`creature design sheet, full body turnaround, head close-up, scale comparison with human, skin/fur/scales material, movement poses`
 - **避免**：怪物细节每格漂移、比例不清
 
+### LS41 留白东方角色研究板
+- **适用**：修行者、僧人、剑修、仙侠角色、克制气质人物；参考“静尘”式横向白底角色设定板
+- **结构**：左侧大幅主立绘；中上正/背/侧三视图；右上坐姿、俯身、蹲姿、仰视等姿态研究；底部面部表情 5 格 + 发型/衣褶/鞋履细节；左下小剪影比例
+- **视觉**：米白或浅灰留白，水墨灰、麻布白、淡铅笔手写质感，文字仅作小号设计注释纹理
+- **强调**：寂静、克制、衣袍垂坠、身体姿态、面部骨相和同一头身比例
+- **Prompt 句式**：`minimal eastern character study board, large hero full-body, turnaround views, posture studies, expression strip, costume detail swatches, quiet white space`
+- **避免**：厚重黑金、强战斗姿势、艳丽高饱和、密集 HUD、文字遮挡角色
+
+### LS42 仙灵长发角色设定板
+- **适用**：女仙、灵体、狐妖、花神、白衣长发角色；参考“卯”式轻盈纯白设定板
+- **结构**：左侧大幅全身主立绘；中部正视/侧视/背视三视图突出长发长度；右侧坐姿、倚坐、俯身、仰视角度；底部表情研究和发丝、领口、腰封、袖摆、花饰等细节
+- **视觉**：柔白背景、半透明纱衣、浅金/淡粉点缀、轻雾边缘光，整体像高级角色设定集展开页
+- **强调**：长发流向、衣料层次、轻盈透明感、五官一致、红色/花饰等极少量识别点
+- **Prompt 句式**：`ethereal immortal character sheet, flowing white hair, translucent layered robes, front side back views, seated and leaning poses, delicate costume detail studies`
+- **避免**：换脸、发长漂移、衣服变厚重盔甲、背景复杂、饱和色过多
+
+### LS43 姿态表演研究板
+- **适用**：需要锁定角色动作气质、坐卧蹲跪、礼仪动作、修行姿态、身体语言的角色
+- **结构**：1 个主立绘 + 8-10 个姿态小图，覆盖站、坐、蹲、跪、俯身、回眸、低头、仰视、行礼、静修；底部放 3-5 个表情 close-up
+- **视觉**：白底动作研究稿，轻阴影接地，少量铅笔注释感，图像之间留足呼吸空间
+- **强调**：同一角色体态、重心、袖摆/发丝受动作影响的连续性
+- **Prompt 句式**：`character pose performance study sheet, same character in ten body-language poses, robe and hair motion consistency, expression close-ups`
+- **避免**：动作过少、同一姿态重复、比例变化、服装在不同姿态中重构
+
+### LS44 服饰细节留白板
+- **适用**：古装、仙衣、僧袍、长袍、纱衣、腰封、衣褶和材质需要单独锁定的角色
+- **结构**：左侧全身主视图；右侧分区展示领口、袖口、腰带、衣摆、鞋履、布料纹理、头饰/花饰/念珠等配饰；底部小色卡与材质块
+- **视觉**：产品设计板 + 古风服装研究稿，浅色背景，细腻材质特写，标注可作为图形纹理存在
+- **强调**：层次穿戴顺序、布料透明度、褶皱方向、配饰位置、不可变识别点
+- **Prompt 句式**：`costume detail white-space board, full-body costume anchor, collar sleeve sash hem shoes fabric swatches, accessory close-ups, layered robe construction`
+- **避免**：只画漂亮全身没有细节、配饰左右颠倒、材质不清、文字压住细节
+
 ## 场景版扩展样式
 
 场景版用于锁空间、光线、材质、天气和拍摄角度。视频项目优先用 LS8 + LS29 或 LS10；复杂空间优先 LS9/LS27。
@@ -353,6 +385,8 @@
 | 场景动线 / 漫游 / 长镜头 | LS30 | 一镜到底→LS38 |
 | 巨物场景 / 神宫 / 巨龙尺度 | LS31 | 神话四镜→LS3 |
 | 角色卡 / 人物设定 / 武侠角色 | LS12 | 视频一致性→LS11，表情→LS21，服装→LS22 |
+| 白底角色设定 / 东方角色研究 / 僧人 / 修行者 | LS41 | 姿态研究→LS43，服饰细节→LS44 |
+| 女仙 / 灵体 / 白衣长发 / 狐妖 / 花神 | LS42 | 表情→LS21，姿态研究→LS43，服饰细节→LS44 |
 | 真人脸一致 / 演员脸 | LS20 | 十二表情→LS21 |
 | 双人关系 / 师徒 / 宿敌 / 情侣 | LS24 | 对话正反打→LS39 |
 | 战损 / 黑化 / 成长 / 变身 | LS25 | 武器交互→LS23 |
@@ -365,7 +399,7 @@
 | 入口 | 首选组合 | 适合用途 |
 |------|----------|----------|
 | 全能版 | LS14 + LS15/LS16/LS17/LS18/LS19 | 一张图定项目方向、提案、风格探索 |
-| 角色板 | LS11 + LS12/LS20/LS21/LS22/LS23/LS24/LS25/LS26 | 锁角色一致性、展示设定、解决脸和服装漂移 |
+| 角色板 | LS11 + LS12/LS20/LS21/LS22/LS23/LS24/LS25/LS26/LS41/LS42/LS43/LS44 | 锁角色一致性、展示设定、解决脸、服装和姿态漂移 |
 | 场景版 | LS8 + LS9/LS27/LS28/LS29/LS30/LS31/LS32 | 锁空间、光线、材质、天气、尺度 |
 | 分镜板 | LS5/LS6/LS7 + LS33/LS34/LS35/LS36/LS37/LS38/LS39/LS40 | 导演执行、视频参考、动作拆解、竖屏短剧 |
 

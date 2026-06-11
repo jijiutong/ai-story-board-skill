@@ -136,3 +136,15 @@
 → 修复完成 → 输出给 `rules/final-video-qc` 做最终质检
 → final-video-qc 不通过 → 再次进入修复（QC修复循环，与评分修复循环共用 REPAIR_MAX_ROUNDS 总限制）
 → **修复后更新 state/**：策略1→更新 `variable-registry.md`（characters.immutable_features）；策略2→更新 `variable-registry.md`（scene.fixed_elements）；策略3/5→更新 `shot-state.md`（action/transition/end_state）；策略4→更新 `variable-registry.md`（word_count）
+
+---
+
+## 死循环防护
+
+| 防护 | 规则 |
+|------|------|
+| 总轮次上限 | `REPAIR_MAX_ROUNDS`（api-config.template.env，默认3）。评分修复 + QC修复累计不超此值 |
+| 连续相同修复 | 同一问题连续2轮修复后评分未提升 → 跳过该问题，标记"放弃修复" |
+| 修复降级 | 第 N 轮评分低于第 N-1 轮 → 回滚到 N-1 轮结果，标记"最优已达" |
+| 阻断项无法修复 | 任一 RM < 30 且 1 轮修复后仍 < 30 → 不继续修，直接标记"需人工介入" |
+| 修复范围收敛 | 每轮修复后，重评范围限 affected dimensions（incremental-update），不跑全量5维 |

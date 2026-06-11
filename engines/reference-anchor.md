@@ -52,14 +52,16 @@
 
 ## 一、平台能力矩阵
 
-| 平台 | 时长 | Prompt字数 | 参考图 | 中文 | 多镜头 |
-|------|------|-----------|--------|------|--------|
-| Seedance | 5-15s | ≤1500字 | ≤12张 | ✅ | ✅ |
-| Runway Gen-3 | 5-10s | ≤500字(英文) | 1-3张 | ❌ | ⚠️有限 |
-| 可灵 | 5-10s | ≤800字 | 1-3张 | ✅ | ✅ |
-| Luma | 5s | ≤300字(英文) | 1-2张 | ❌ | ❌ |
-| Sora | ≤60s | ≤500字(英文) | 0-1张 | ❌ | ⚠️ |
-| Pika | 3-4s | ≤300字(英文) | 1-2张 | ❌ | ❌ |
+> **所有限制从 `api-config.template.env` 读取，此表为文档参考。修改 config 即全局生效。**
+
+| 平台 | 配置键 | 时长 | Prompt字数 | 参考图 | 中文 |
+|------|--------|------|-----------|--------|------|
+| Seedance | `SEEDANCE_*` | `SEEDANCE_MAX_DURATION` | `SEEDANCE_MAX_PROMPT_CHARS` | `SEEDANCE_MAX_REF_IMAGES` | `SEEDANCE_SUPPORTS_CHINESE` |
+| Runway | `RUNWAY_*` | `RUNWAY_MAX_DURATION` | `RUNWAY_MAX_PROMPT_CHARS` | `RUNWAY_MAX_REF_IMAGES` | `RUNWAY_SUPPORTS_CHINESE` |
+| 可灵 | `KELING_*` | `KELING_MAX_DURATION` | `KELING_MAX_PROMPT_CHARS` | `KELING_MAX_REF_IMAGES` | `KELING_SUPPORTS_CHINESE` |
+| Luma | `LUMA_*` | `LUMA_MAX_DURATION` | `LUMA_MAX_PROMPT_CHARS` | `LUMA_MAX_REF_IMAGES` | `LUMA_SUPPORTS_CHINESE` |
+| Sora | `SORA_*` | `SORA_MAX_DURATION` | `SORA_MAX_PROMPT_CHARS` | `SORA_MAX_REF_IMAGES` | `SORA_SUPPORTS_CHINESE` |
+| Pika | `PIKA_*` | `PIKA_MAX_DURATION` | `PIKA_MAX_PROMPT_CHARS` | `PIKA_MAX_REF_IMAGES` | `PIKA_SUPPORTS_CHINESE` |
 
 ---
 
@@ -69,26 +71,29 @@
 
 ### Seedance（参考图优先型）
 ```
-理想完整包（≤12张）：场景参考 + 角色卡 + 全案图 + 分镜图×N + 尾帧 + 首帧
-实际分配 = 已存在 ∩ 需求，按优先级排序，不超12张上限
+上限 = SEEDANCE_MAX_REF_IMAGES（api-config.template.env，默认12）
+理想完整包：场景参考 + 角色卡 + 全案图 + 分镜图×N + 尾帧 + 首帧
+实际分配 = 已存在 ∩ 需求，按优先级排序，不超上限
 ```
-> @编号和排序以存在性检查结果为准。
 
 ### Runway Gen-3（Prompt优先型）
 ```
-理想完整包（3张）：首帧 + 关键帧 + 尾帧
+上限 = RUNWAY_MAX_REF_IMAGES（api-config.template.env，默认3）
+理想完整包：首帧 + 关键帧 + 尾帧
 缺失则降级为纯 prompt DNA 描述
 ```
 
 ### 可灵（首帧优先型）
 ```
-理想完整包（3张）：首帧 + 角色卡 + 关键帧
+上限 = KELING_MAX_REF_IMAGES（api-config.template.env，默认3）
+理想完整包：首帧 + 角色卡 + 关键帧
 缺失则降级为 prompt + 首帧为主
 ```
 
 ### Luma / Pika（轻量型）
 ```
-理想完整包（2张）：首帧 + 尾帧
+上限 = LUMA_MAX_REF_IMAGES / PIKA_MAX_REF_IMAGES（api-config.template.env，默认2）
+理想完整包：首帧 + 尾帧
 缺失则纯 prompt 驱动
 ```
 

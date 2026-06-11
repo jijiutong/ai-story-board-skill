@@ -247,9 +247,9 @@ asset-plan → consistency-trigger → reference-anchor → motion-physics → v
   │
   ├─ 短句 ≤SHORT_INPUT_THRESHOLD_CHARS（api-config.template.env）→ project-manager（auto-init）→ 一键生成最快路径
   │
-  ├─ 段落 100-2000字 → project-manager（auto-init）→ 单段故事路径
+  ├─ 段落 SHORT_INPUT_THRESHOLD_CHARS ~ MID_INPUT_THRESHOLD_CHARS 字 → project-manager（auto-init）→ 单段故事路径
   │
-  └─ 超长 >2000字 → 问用户：压缩成一段还是拆段？
+  └─ 超长 >MID_INPUT_THRESHOLD_CHARS 字 → 问用户：压缩成一段还是拆段？
       ├─ 拆段 → shot-budget 判断拆几段
       └─ 压缩 → shot-budget
 ```

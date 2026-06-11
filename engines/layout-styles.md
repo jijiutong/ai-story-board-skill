@@ -15,13 +15,13 @@
 | 全案图/项目总览 | LS14（主）/LS1/LS2/LS3/LS4 |
 | 分镜图/故事板 | LS5/LS6/LS7 |
 | 场景图/环境锁定 | LS8/LS9/LS10 |
-| 角色卡/人物设定 | LS11/LS12/LS13 |
+| 角色卡/人物设定 | LS11/LS12/LS13/LS41/LS42/LS43/LS44 |
 | 竖屏短剧 | LS34 |
 | 动作拆解 | LS35 |
 | 巨物场景 | LS31 |
 | 真人脸一致 | LS20 |
 
-> 完整40种版式定义见 `knowledge/layout-styles.md`
+> 完整44种版式定义见 `knowledge/layout-styles.md`
 
 ---
 
@@ -73,7 +73,7 @@
 | 入口 | 首选组合 |
 |------|---------|
 | 全能版 | LS14 + LS15/LS16/LS17/LS18/LS19 |
-| 角色板 | LS11 + LS12/LS20/LS21/LS22/LS23/LS24/LS25/LS26 |
+| 角色板 | LS11 + LS12/LS20/LS21/LS22/LS23/LS24/LS25/LS26/LS41/LS42/LS43/LS44 |
 | 场景版 | LS8 + LS9/LS27/LS28/LS29/LS30/LS31/LS32 |
 | 分镜板 | LS5/LS6/LS7 + LS33/LS34/LS35/LS36/LS37/LS38/LS39/LS40 |
 
@@ -82,7 +82,7 @@
 ## 联动流程图
 
 ```
-输出需求 ──→ layout-styles.md ──→ 版式编号(LS1-LS40)
+输出需求 ──→ layout-styles.md ──→ 版式编号(LS1-LS44)
                 │
                 ▼
         knowledge/layout-styles.md ──→ 版式参数
