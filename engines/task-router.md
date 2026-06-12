@@ -230,7 +230,7 @@ final-video-qc ← 音效覆盖 + 时机配合检查
 | `/create fast` / "快速" / "先看方向" | 快速一键 | project-manager（auto-init）→ command-gate（mode=stable）→ /create fast 链路 |
 | `/create full` / "完整全案" / "全部都来" | 完整全案 | project-manager（auto-init）→ command-gate（mode=project）→ /create full 链路 |
 | `/create standard` / `/create` 默认 | 标准一键 | project-manager（auto-init）→ command-gate（mode=stable）→ /create standard 链路 |
-| "从 Obsidian 读取" | Obsidian 输入 | sources/obsidian-ingest → story-intake → ... |
+| `/source` / "从 Obsidian 读取" | 输入源读取 | sources/obsidian-ingest → story-intake → ... |
 | "生成角色卡" / "出角色卡" | 单独生成角色卡 | **/character 子链**：story-intake → state/variable-registry → consistency-trigger（角色方法决策）→ character-sheet → state/asset-map → final-video-qc |
 | "生成场景图" / "出场景图" | 单独生成场景图 | **/scene 子链**：story-intake → state/variable-registry → consistency-trigger（场景方法决策）→ 用户确认版式 → scene-card → state/asset-map → final-video-qc |
 | "生成分镜图" / "出故事板" | 单独生成分镜图 | **/storyboard 子链**：story-intake → shot-budget → video-director → state/shot-state → full-board/quick-board → state/asset-map → final-video-qc |

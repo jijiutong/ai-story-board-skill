@@ -181,6 +181,7 @@ flowchart LR
 | `SKILL.md` | 总控路由、命令边界与执行契约 | [总控说明](./SKILL.md) |
 | `sources/` | 粘贴、Markdown、Obsidian 与 frontmatter 摄入 | [输入源](./sources/README.md) |
 | `engines/` | 路由、导演决策、规划、评分、修复与打包 | [引擎地图](./engines/README.md) |
+| `docs/` | 使用手册、能力白皮书、系统架构与命令参考 | [文档中心](./docs/README.md) |
 | `state/` | 状态注册、资产映射、镜头快照与项目依赖图 | [状态管理](./state/README.md) |
 | `rules/` | 格式、一致性、编号、质量与平台硬约束 | [质量规则](./rules/qc.md) |
 | `templates/` | 角色卡、场景卡、故事板、海报和声音模板 | [模板目录](./templates/README.md) |
@@ -188,7 +189,10 @@ flowchart LR
 | `platforms/` | 图像与视频平台适配、API 集成 | [平台适配](./platforms/README.md) |
 | `sub-skills/` | 面向用户命令的独立工作流 | [子技能](./sub-skills/README.md) |
 | `imitation/` | 导演与工作室视觉方法参考库 | [风格参考](./imitation/README.md) |
+| `examples/` | 示例项目与参考输出 | [示例](./examples/) |
 | `projects/` | 长片、连续剧与多段项目持久化 | [项目系统](./projects/README.md) |
+| `.agents/` | Agent 配置目录 | — |
+| `.claude/` | Claude Code 配置目录 | — |
 
 完整数据流与文件归位规则见 [系统架构](./docs/system-architecture.md)。
 
