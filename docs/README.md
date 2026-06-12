@@ -1,34 +1,62 @@
-# AI Visual Director Docs
+# AI Visual Director 文档中心
 
-AI Visual Director 的文档只保留权威入口。旧方案、重复说明和历史草案已移除，避免 LLM 在执行时读取到冲突口径。
+这里汇总项目的权威文档入口。建议从任务出发阅读，不必按目录逐个翻找。
 
-这套 skill 的定位是受控 AI 视觉生产系统：
+## 快速导航
 
-```text
-稳定理解需求
-锁定格式、状态与资产用途
-按命令边界调用导演能力
-输出可复制、可检查、可迭代的 prompt package
-```
+| 我想了解 | 推荐文档 |
+|---|---|
+| 如何安装、选择命令和完成第一次生成 | [使用手册](./usage.md) |
+| 系统能做什么、哪些能力默认开启 | [能力白皮书](./capabilities.md) |
+| 引擎、状态、规则和模板如何协作 | [系统架构](./system-architecture.md) |
+| Skill 的总路由与执行契约 | [主技能说明](../SKILL.md) |
+| 项目首页与完整模块地图 | [项目 README](../README.md) |
 
-## 权威文档
+## 按工作流阅读
 
-| 文档 | 用途 |
-|------|------|
-| [`usage.md`](usage.md) | 使用手册：命令入口、`/create` 档位、状态写回 |
-| [`capabilities.md`](capabilities.md) | 能力白皮书：能力分层、调用边界、默认开关、资产用途 |
-| [`testing.md`](testing.md) | 测试手册：治理层、核心命令、输出质量、高级能力 |
-
-## 运行记录
-
-| 文档 | 用途 |
-|------|------|
-| [`failure-log.md`](failure-log.md) | 失败样本记录，用于 prompt-qc、auto-repair 和规则回流 |
-
-## 阅读顺序
+### 使用者
 
 ```text
-usage.md        先知道怎么用
-capabilities.md 再知道能力边界
-testing.md      最后知道怎么证明它稳定
+README → 使用手册 → 选择命令 → 生成 → /lock → /commit
 ```
+
+- [一键生成 `/create`](../sub-skills/create/SKILL.md)
+- [角色设计 `/character`](../sub-skills/character/SKILL.md)
+- [场景设计 `/scene`](../sub-skills/scene/SKILL.md)
+- [分镜设计 `/storyboard`](../sub-skills/storyboard/SKILL.md)
+- [视频执行包 `/video`](../sub-skills/video/SKILL.md)
+
+### 系统维护者
+
+```text
+系统架构 → 主技能契约 → 引擎地图 → 状态管理 → 规则与模板
+```
+
+- [引擎地图](../engines/README.md)
+- [状态管理](../state/README.md)
+- [模板目录](../templates/README.md)
+- [知识库说明](../knowledge/README.md)
+- [平台适配](../platforms/README.md)
+- [输入源系统](../sources/README.md)
+
+### 长内容与系列项目
+
+```text
+输入源 → 项目初始化 → 状态快照 → 连续性检查 → 增量更新
+```
+
+- [项目持久化](../projects/README.md)
+- [项目管理引擎](../engines/project-manager.md)
+- [项目依赖图](../engines/project-graph.md)
+- [连续性检查](../rules/continuity-check.md)
+- [增量更新](../engines/incremental-update.md)
+
+## 文档原则
+
+- `docs/` 解释如何使用、能力边界和整体架构。
+- `SKILL.md` 是总控契约，决定命令路由与治理规则。
+- `engines/` 描述决策过程，`rules/` 描述不可违反的约束。
+- `templates/` 定义最终输出结构，`state/` 保存已确认的项目事实。
+- `knowledge/` 只提供候选素材，不得覆盖锁定状态。
+
+返回 [项目首页](../README.md)。
