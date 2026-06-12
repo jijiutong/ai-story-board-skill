@@ -2,7 +2,7 @@
 
 > **模式限制：D类 发散探索层**。仅 `explore` 或 `project` 模式可调用（长项目/批量专用）。产出标记 `draft`。详见 `engines/command-gate.md` §四。
 
-一次丢整章小说，自动拆分成多个场景/回合，批量生成对应故事板。
+一次丢整章小说，自动拆分成多个场景/回合，批量生成对应故事板。输入来源支持 obsidian-ingest、paste-input、frontmatter-parser。
 
 ## 拆分规则
 

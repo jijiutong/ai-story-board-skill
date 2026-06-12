@@ -159,30 +159,31 @@ const imageUrl = result.data[0].url;
 
 ## 五、通义万相 (Alibaba Cloud DashScope)
 
+模型：`qwen-image-2.0-pro`，支持文本+图片混合输入。
+
 ```javascript
-const response = await fetch("https://dashscope.aliyuncs.com/api/v1/services/aigc/text2image/image-synthesis", {
+const response = await fetch("https://dashscope.aliyuncs.com/api/v1/services/aigc/multimodal-generation/generation", {
   method: "POST",
   headers: {
     "Authorization": `Bearer ${process.env.DASHSCOPE_API_KEY}`,
-    "Content-Type": "application/json",
-    "X-DashScope-Async": "enable"
+    "Content-Type": "application/json"
   },
   body: JSON.stringify({
-    model: "wan2.1-t2i",
+    model: "qwen-image-2.0-pro",
     input: {
-      prompt: `[中文 prompt]`
+      messages: [{
+        role: "user",
+        content: [{ text: `[中文 prompt]` }]
+      }]
     },
     parameters: {
-      size: "1024*1024",
-      n: 1
+      size: "1792*1024"  // 16:9
     }
   })
 });
 
 const result = await response.json();
-// 异步任务，需轮询
-const taskResult = await pollTask(result.output.task_id);
-const imageUrl = taskResult.output.results[0].url;
+const imageUrl = result.output.choices[0].message.content[0].image;
 ```
 
 **适用场景**：中文理解强，古风/国风/东方题材效果好
