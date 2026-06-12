@@ -251,7 +251,6 @@ final-video-qc ← 音效覆盖 + 时机配合检查
 | "太乱了" / "画面太脏" / "画面太满" | 自然语言 → 全维度降噪 | **engines/prompt-declutter** |
 | "更干净" / "更留白" / "更清爽" | 自然语言 → 降密度 | **engines/visual-density-controller**（density -1）→ 更新 visual-control-state |
 | "信息多一点" / "设定集一点" | 自然语言 → 升密度 | **engines/visual-density-controller**（density +1，不超过上限） |
-| "/compact" / "压缩 prompt" / "压缩上下文" / "去噪" | Token 压缩/去噪 | **/avd/compact**（prompt-compression + prompt-declutter） |
 | `/lock` / "锁定" / "这个定了" / "就这版" / "角色锁定" / "场景锁定" / "全部锁定" | 锁定当前产出 | **engines/state-commit**（/lock 流程）→ 写入 lock-state |
 | `/commit` / "确认采用" / "用这版" | 提交锁定内容到主状态 | **engines/state-commit**（/commit 流程）→ 写入 variable-registry + 持久化 |
 | `/unlock` / "解锁" | 解除锁定 | **engines/state-commit**（/unlock 流程）→ 清除 lock-state 对应字段 |
@@ -391,7 +390,6 @@ mode=project（C类导演增强层默认开放）
   ├─ 含 "更干净"/"更留白"/"更清爽" → visual-density-controller（density -1）
   ├─ 含 "信息多一点"/"设定集" → visual-density-controller（density +1，不超过上限）
   │
-  ├─ 含 "/compact" / "压缩 prompt" / "压缩上下文" / "去噪" → /avd/compact（prompt-compression + prompt-declutter）
   │
   ├─ 含 "多版本"/"A/B" → 多版本对比模式（同批次产出，state/ 按版本标注）
   │
@@ -422,7 +420,6 @@ mode=project（C类导演增强层默认开放）
 | `/create fast` | **零确认**，直接出快速结果 |
 | `/create standard`（默认） | **零确认**，直接出结果 |
 | `/create full` | 最多 1 次确认（确认完整度：台词+音效+海报+导演阐述是否需要） |
-| `/compact` / 压缩/去噪 | **零确认**，直接出压缩结果 |
 | 一键生成（≤SHORT_INPUT_THRESHOLD_CHARS字） | **零确认**，直接出 /create standard |
 | 一键生成（>SHORT_INPUT_THRESHOLD_CHARS字或有歧义） | 最多 1 次确认（风格+时长） |
 | 单段故事 | 最多 1 次确认（风格+时长+格式） |

@@ -87,7 +87,6 @@ git clone https://github.com/jijiutong/ai-visual-director.git && cd ai-visual-di
 | `/sound` | 环境音 / 拟音 / 音乐 / 混响设计 | 16 SE × 20 FX × 12 MU × 8 RS |
 | `/poster` | 电影海报，10 风格 × 3 画幅 | marketing_asset，不进视频 |
 | `/style` | 53 风格浏览、融合、迁移、14 导演模仿 | 默认 derived，不写回 |
-| `/compact` | Token 压缩、上下文管理、视觉去噪 | 不重做角色和故事 |
 
 治理命令：`/lock` `/commit` `/unlock` `/check`
 
@@ -128,7 +127,7 @@ draft（默认，不写回） → locked（确认，禁止自动修改） → co
 | `rules/` | 19 个规则文件 — 格式合同、编号体系、QC、一致性、负面词、平台红线 |
 | `templates/` | 12 个 Prompt 模板 — 全案板、角色卡、场景卡、分镜图、海报、台词、音效 |
 | `knowledge/` | 32 个知识库 — 镜头、灯光、构图、表情、材质、声音、时代、道具 |
-| `sub-skills/` | 9 个子入口 — create / character / scene / storyboard / video / source / poster / style / compact |
+| `sub-skills/` | 8 个子入口 — create / character / scene / storyboard / video / source / poster / style |
 | `state/` | 14 个状态文件 — 变量注册、锁定、资产映射、镜头状态、对话/音效映射、依赖图 |
 | `imitation/` | 14 位导演风格库 — 王家卫/维伦纽瓦/诺兰/吉卜力/皮克斯/张艺谋… |
 

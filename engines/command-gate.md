@@ -172,11 +172,6 @@ mood-slider（engines/mood-slider.md）
 |---------|---------|-------------|-------------|
 | A类全部、prompt-declutter、visual-density-controller | — | 重做角色脸、重写故事方向、换风格、改场景核心结构 | draft_only（格式修复可写回。内容修复需用户确认） |
 
-### /compact
-
-| must_use | may_use | forbidden_use | write_policy |
-|---------|---------|-------------|-------------|
-| A类全部、prompt-compression、prompt-declutter、visual-density-controller | — | 重做角色DNA、重写场景、修改故事方向、生成新资产 | draft_only（压缩/去噪后内容变更需用户确认） |
 
 ---
 

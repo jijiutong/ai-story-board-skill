@@ -87,7 +87,6 @@ Story intake → Character anchor → Scene anchor → Full board prompt → Vid
 | `/sound` | Ambience / foley / music / reverb design | 16 SE × 20 FX × 12 MU × 8 RS |
 | `/poster` | Movie posters, 10 styles × 3 aspect ratios | Enter video pipeline. marketing_asset. |
 | `/style` | 53 style browser, fusion, migration, 14 director imitations | Write back. derived by default. |
-| `/compact` | Token compression, context management, visual declutter | Redesign characters or story |
 
 Governance: `/lock` `/commit` `/unlock` `/check`
 
@@ -128,7 +127,7 @@ draft (default, no write-back) → locked (confirmed, immutable) → committed (
 | `rules/` | 19 rule files — format contracts, numbering, QC, consistency, negatives, platform red lines |
 | `templates/` | 12 prompt templates — full boards, character sheets, scene cards, storyboards, posters, dialogue, sound |
 | `knowledge/` | 32 knowledge bases — camera, lighting, composition, expression, materials, sound, era, props |
-| `sub-skills/` | 9 entry points — create / character / scene / storyboard / video / source / poster / style / compact |
+| `sub-skills/` | 8 entry points — create / character / scene / storyboard / video / source / poster / style |
 | `state/` | 14 state files — variable registry, locks, asset map, shot state, dialogue/sound maps, dependency graph |
 | `imitation/` | 14 director style libraries — Wong Kar-wai, Villeneuve, Nolan, Ghibli, Pixar, Zhang Yimou… |
 
