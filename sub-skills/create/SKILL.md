@@ -111,6 +111,22 @@ task-router
 - 自动生成最低必要资产
 - 平台不支持当前时长时，自动拆段或压缩
 
+## 🔴 语言强制规则
+
+**视频 Prompt 输出语言由配置决定，不可自由发挥。**
+
+| 条件 | 输出语言 |
+|------|---------|
+| `DEFAULT_LANGUAGE=zh` + 平台支持中文（Seedance/可灵/通义万相） | **必须中文** |
+| `DEFAULT_LANGUAGE=zh` + 平台不支持中文（Runway/Luma/Pika） | 必须英文 |
+| `DEFAULT_LANGUAGE=en` | 必须英文 |
+
+- ❌ **禁止**：配置是中文平台却输出英文 prompt——这是阻断级错误
+- ❌ **禁止**：以"英文效果更好"为由跨语言输出
+- ✅ 角色卡/场景图/全案板 Prompt 同样遵循此规则
+
+> 详细规则见 `engines/video-prompt-assembly.md` § 语言强制规则。QC 检查见 `rules/prompt-qc.md` § 维度1。
+
 ## 旧命令兼容
 
 用户说 `/avd/storyboard 一键生成` 时，始终保留故事板/分镜图核心链路；只有用户明确说“继续出视频包/转视频/成片执行包”时，才追加 `/avd/create` 后半段编排。

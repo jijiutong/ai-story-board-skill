@@ -26,6 +26,11 @@
 **角色卡是角色锚点** — 防止角色面部/服装/武器变形跑偏。
 **视频分镜图是画面锚点** — 防止 AI 视频工具在长序列中偏离关键视觉。
 **@图数量 = 实际照片数** — 组装 prompt 前读取 `state/asset-map.md`，asset-map 里有几张 @图，prompt 里就写几张。不硬编码数量、不编造不存在的 @图引用。用户上传 N 张照片，prompt 就说「共 N 张」、引用 @图0 到 @图N-1。
+**🔴 语言强制规则** — 组装视频 prompt 前，必须读取 `api-config.template.env` 中的 `DEFAULT_LANGUAGE` 和目标平台的 `{PLATFORM}_SUPPORTS_CHINESE`。规则：
+  - `DEFAULT_LANGUAGE=zh` 且平台 `SUPPORTS_CHINESE=true` → **必须输出中文 prompt**，禁止输出英文
+  - `DEFAULT_LANGUAGE=zh` 但平台 `SUPPORTS_CHINESE=false` → 必须输出英文 prompt（如 Runway/Luma/Pika）
+  - `DEFAULT_LANGUAGE=en` → 必须输出英文 prompt
+  - **违反此规则 = 阻断**，不得以"英文效果更好"为由跨语言输出。这是硬约束，不是建议。
 
 ---
 
