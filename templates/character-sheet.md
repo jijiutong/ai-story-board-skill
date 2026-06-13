@@ -37,6 +37,17 @@
 □ 服饰/武器/配饰细节（结构清楚，比例准确）
 □ 不可变特征 3-5 个（红色标注框标记，跨镜绝对不变）
 □ 同一角色跨所有模块：脸/身高/肩宽/服装层次 100% 一致
+□ **🔴 皮肤与材质（人物必加）**：查 `knowledge/materials.md` §§ 人体材质
+   - 年龄 → 细纹 MT1-MT8 中选适用项（拒绝零瑕疵）
+   - 肤质瑕疵 → MT9-MT15 中选 1-2 种（告别完美假面）
+   - 如有痘痘 → MT16-MT19 最多选 1-2 项
+   - 毛发 → 女/少年：MT20(绒毛)+MT23(碎发)+MT24(发际绒毛)；男：加 MT21 或 MT22(胡茬)
+   - 特殊瑕疵 → MT25-MT30 按角色需要最多选 2-3 项
+   - 生活状态 → 叠加 MT31(风霜)/MT32(养尊)/MT33(苦修)
+   - 剧情状态 → MT34(湿润/汗水/雨中)/MT35(受伤/血迹/淤青) 按剧情需要叠加
+   - 毛发主体 → MT36(发丝光泽/飘动/质感)，配合 MT20-MT24 边缘毛发
+   - 服装材质 → 查 MT 织物/皮革/金属，写入织法/磨损/纱线/锈斑
+   - Prompt 末尾追加：visible skin pores, natural skin texture, subtle imperfections(1-2种), no airbrushed skin, no beauty filter
 ```
 
 > LS41 留白东方 = 最低标准。即使最克制的版式也包含：主立绘+三视图+姿态研究+剪影比例+细节特写+表情条。角色卡不提供比 LS41 更简化的版本。
@@ -169,6 +180,42 @@
 专业三视图设定卡，主题《[片名]》，角色：[角色姓名]。16:9 横版，严格正交三视图布局：正面全身、侧面全身、背面全身，三个视图严格对齐同一水平线，相同比例，无透视变形。DNA标注：面部 [面部特征]，发型 [发型]，体型 [体型]，身高 [身高描述]。材质标注（MT编号）：[MT编号. 服装材质]/[MT编号. 配饰材质]/[MT编号. 皮肤质感]。颜色标注（CN编号）：[CN编号. 色彩方案] 含 [主色1]/[主色2]/[点缀色]。道具标注（PR编号）：[PR编号. 武器/道具]。尺寸比例标注：头身比/肩宽/臂长/腿长。背景纯白或中性灰。角色造型：[风格编号. 风格名称]，[服装描述]，[身体姿态: BL编号]。technical character turnaround, orthographic front/side/back views, aligned on same baseline, same scale, no perspective distortion, DNA annotations, material callouts with texture references, color swatches with hex references, prop callouts, dimension annotations, clean white background, professional 3D modeling reference, ultra-detailed, 8K, sharp focus, no watermark, no background elements, no shadows。
 ```
 
+## 模式 C：角色单张（格式 10）
+
+> 单张电影级角色肖像——一张图一个人，非多模块参考板。适合快速出图、角色定妆、海报素材、社交分享。只展示这个角色最有辨识度的一个瞬间。
+
+```text
+电影级角色肖像，主题《[片名]》，角色：[角色姓名]。[画幅比例，默认16:9（横版电影感）或用户指定9:16竖版]，单张角色定妆照，非拼贴、非多宫格、非参考板。
+
+主视觉：[角色姓名] [姿态 BL编号. 姿态关键词] 于 [场景背景或纯色背景]。[全身/半身/特写，按用户需要]。占画面 70-80%。
+
+角色DNA：[年龄/身份]，[面部特征——脸型/眼型/瞳色/眉型/鼻型/唇型]，[发型发色+状态]，[服装描述——层次/材质/颜色/磨损状态]，[武器/道具 PR编号——如有]。
+
+皮肤与材质细节（同「角色卡最低要求」§ 🔴 皮肤与材质，查 `knowledge/materials.md` §§ 人体材质）
+
+表情：ME编号. 表情名称——[具体描述，mm级：眉移动量/嘴角位移/瞳孔大小]。
+
+光线：[灯光方案——主光方向+类型+色温]，[补光如有]，[氛围光]。
+
+色彩：CN编号. 色彩方案，配色 [主色1] + [主色2] + [点缀色]。
+
+背景：[场景描述——EV编号如有/纯色背景/渐变/虚化环境]，密度低不抢主体。
+
+风格：VS编号. 风格名称，[氛围关键词]。cinematic character portrait, single subject, no multi-panel, no grid, no text, no labels, no annotations, visible skin pores, natural skin texture, subtle peach fuzz, no airbrushed skin, no plastic doll skin, no beauty filter, realistic human skin, ultra-detailed, 8K, sharp focus, no watermark, no logo, no garbled text, no broken faces。
+```
+
+### 版本变体
+
+| 用户说 | 行为 |
+|--------|------|
+| `角色单张 横版` | 16:9 电影感全身/半身像 |
+| `角色单张 竖版` / `抖音` | 9:16 竖版角色肖像 |
+| `角色单张 特写` | 面部或上半身特写，背景极度虚化 |
+| `角色单张 全身` | 16:9 全身站姿，展示完整服装和体态 |
+| `角色单张 动作` | 角色在执行标志性动作的瞬间 |
+| `角色单张 纯色背景` | 白/灰/黑背景，影棚质感 |
+| `角色单张 场景中` | 角色站在故事场景中，场景不抢主体 |
+
 ## 完整示例 — 标准角色设定卡
 
 ### 输入
@@ -180,7 +227,7 @@
 - CN编号：CN8 复仇红黑
 - PR编号：PR1 长剑「断念」
 - BL编号：BL1 站姿
-- MT编号：MT2 皮肤/MT18 丝绸/MT10 钢铁
+- MT编号：MT2 皮肤(眼角干纹)/织物 MT15 丝绸/金属 MT7 钢铁
 - ME编号：ME15 悲伤/ME7 愤怒/ME6 平静/ME25 震撼
 
 ### 输出 Prompt
@@ -235,7 +282,7 @@ ultra-detailed, 8K, sharp focus。
 | ME编号 | `knowledge/micro-expressions.md` | 按角色情绪底色匹配 4 种 |
 | PR编号 | `knowledge/props.md` | 按武器/道具匹配 |
 | BL编号 | `knowledge/body-language.md` | 按角色姿态匹配 |
-| MT编号 | `knowledge/materials.md` | 服装材质→MT18/MT19/MT20 |
+| MT编号 | `knowledge/materials.md` | 皮肤→MT1-MT36（年龄/瑕疵/毛发/状态 按§一规则选择）；服装→织物 MT15-MT22 / 金属 MT7-MT14；道具→金属/自然 MT |
 | CN编号 | `engines/color-narrative.md` | 按情绪匹配 |
 | VS编号 | `engines/styles.md` | 用户选择或智能推荐 |
 | 不可变特征 | — | AI 按角色描述推断 3-5 个关键特征 |

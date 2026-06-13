@@ -11,6 +11,14 @@ no speech bubbles (unless manga format), no cartoon style (unless specified),
 no flat illustration, no marketing poster style
 ```
 
+## 🔴 角色图专属负面词（所有人物角色 Prompt 必加）
+
+```
+no airbrushed skin, no beauty filter, no plastic doll skin,
+no smooth featureless face, no over-smoothed skin texture,
+no digital skin retouching, no perfect porcelain skin
+```
+
 ## 按风格追加负面词
 
 | 风格 | 追加负面词 |

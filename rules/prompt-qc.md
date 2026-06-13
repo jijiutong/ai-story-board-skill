@@ -32,7 +32,13 @@
 □ background 符合要求（白/浅灰/纯色等）？
 □ density_level 在合同允许范围内？
 □ subject_ratio 满足最低占比？
-□ language 与合同声明一致？（从 format-contract-state 读取。中文平台输出英文 prompt → 阻断；英文平台输出中文 prompt → 阻断）
+□ **🔴 language** — 视频 Prompt 语言与配置一致？（阻断级检查，优先级最高）:
+    1. 读取 `api-config.template.env` → `DEFAULT_LANGUAGE` + `{PLATFORM}_SUPPORTS_CHINESE`
+    2. `DEFAULT_LANGUAGE=zh` + `SUPPORTS_CHINESE=true` → Prompt 必须是中文，英文 = 阻断
+    3. `DEFAULT_LANGUAGE=zh` + `SUPPORTS_CHINESE=false` → Prompt 必须是英文
+    4. `DEFAULT_LANGUAGE=en` → Prompt 必须是英文
+    5. 此检查对所有 prompt 类型生效（视频/角色卡/场景图/全案板）
+    6. 中文平台的图像 prompt（角色卡/场景图/全案板）因平台支持中文也必须用中文
 ```
 
 **合同来源**：`state/format-contract-state.md`（由 task-router 生成前写入）。如该文件为空（未锁定），使用 `rules/format-contract.md` 中对应 output_type 的默认值。

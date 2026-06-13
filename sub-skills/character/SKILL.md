@@ -80,6 +80,8 @@ description: 【AI视觉导演】角色设计 — 8种一致性方法（模式A/
 ### Step 3: 生成 Prompt
 
 > **⚠️ 模板强制规则**：生成任何角色卡 Prompt 前，**必须先读取 `templates/character-sheet.md`**（项目根目录）。模板文件是 Prompt 结构的权威来源。本 Skill 中嵌入的版式描述仅为触发路由和简要参考，完整 Prompt 结构（模块1-6顺序、变量编号 ME/PR/BL/MT/CN/VS、不可变特征格式、服装分层标注、禁止项）以 `templates/character-sheet.md` 为准。不读模板直接写 = bug。
+>
+> **🔴 皮肤/材质细节强制规则**：所有人物角色 Prompt 生成前，**必须先查 `knowledge/materials.md` §§ 人体材质**。按年龄查 MT1-MT8 细纹皱纹、MT9-MT15 肤质瑕疵（选1-2种）、MT20-MT24 毛发绒毛+MT36 毛发主体、MT25-MT30 特殊瑕疵（最多2-3项）、MT31-MT33 生活状态叠加、MT34 湿润/MT35 受伤(按剧情)。Prompt 末尾追加 `visible skin pores, natural skin texture, subtle imperfections, no airbrushed skin, no beauty filter`。不查询 MT 直接写皮肤 = bug。
 
 **默认：角色设定卡（模式A 6模块全量版 · 出图模式）**
 
